@@ -2,7 +2,7 @@ class MenuCategoryController < ApplicationController
   before_action :set_menu_category, only: %i[ show edit update destroy ]
 
   def index
-    @categories = MenuCategory.all
+    @pagy, @categories = pagy(MenuCategory.all.order(:id))
   end
 
   def search
