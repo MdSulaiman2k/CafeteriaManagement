@@ -8,9 +8,9 @@ class MenuCategoryController < ApplicationController
   def search
     name = params[:name]
     unless name.nil?
-      @categories = MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%'")
+      @pagy, @categories = pagy(MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id))
     else
-      @categories = MenuCategory.all
+      @pagy, @categories = pagy(MenuCategory.all.order(:id))
     end
     render "index"
   end
