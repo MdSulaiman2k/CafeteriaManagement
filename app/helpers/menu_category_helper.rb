@@ -1,0 +1,2 @@
+module MenuCategoryHelper
+end
