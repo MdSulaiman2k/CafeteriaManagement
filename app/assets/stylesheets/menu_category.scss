@@ -1,3 +1,50 @@
 // Place all the styles related to the MenuCategory controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.Category {
+  margin-left: 5rem;
+}
+
+.search-box {
+  padding: 1rem;
+}
+
+.add-category {
+  padding: 1rem;
+}
+
+.Edit-category-image {
+  width: 20px;
+  height: 20px;
+  margin-left: 1rem;
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
+.Delete-category-image {
+  width: 20px;
+  height: 20px;
+  margin-left: 1rem;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.Categories {
+  display: inline-flex;
+}
+
+.Categories:hover {
+  background-color: #f1edf7;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Categories:hover .Delete-category-image {
+  visibility: visible;
+}
+
+.All-content {
+  margin: 3rem;
+  margin-left: 5rem;
+  margin-right: 0rem;
+}

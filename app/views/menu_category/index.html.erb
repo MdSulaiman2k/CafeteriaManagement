@@ -1,1 +1,59 @@
-<h1>Category</h1>
+<div class="All-content">
+  <div class="row bg-dark category">
+    <div class="col-3"></div>
+    <div class="col-4 add-category">
+      <%= form_with(url:"/menu_category" ,
+                  method: "post") do |form|
+      %>
+      <%= form.text_field :name,
+                          class: "AddCategory",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Add Category"
+        %>
+      <%= form.submit "Add",
+                    class: "btn btn-outline-success AddCategory"
+        %>
+    <%end%>
+  </div>
+  <div class="col-3 search-box">
+    <%= form_with(url: search_menu_category_path , method: "get") do |form|%>
+      <%= form.text_field :name,
+                          class: "SearchCategory",
+                          autocomplete: "off",
+                          placeholder: "Search"
+      %>
+      <%= form.submit "Search",
+                    class: "btn btn-outline-success Search"
+      %>
+    <%end%>
+  </div>
+</div>
+<div class="row">
+  <% @categories.each do |category|%>
+    <div class="col-3" style="margin:10px">
+    </div>
+    <div class="col-9" style="margin:10px">
+      <div class="Categories row">
+        <div class="col-4">
+          <%= category.name%>
+        </div>
+        <div class="col-3">
+          <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+                      edit_menu_category_path(category)
+          %>
+        </div>
+        <div class="col-2">
+          <%= form_with(url: "/menu_category/#{category.id}",
+              method:"delete") do
+          %>
+          <%= image_submit_tag( "delete.png",
+                                class: 'Delete-category-image')
+            %>
+        <%end%>
+      </div>
+    </div>
+    <br>
+  <%end%>
+</div>
+</div>
