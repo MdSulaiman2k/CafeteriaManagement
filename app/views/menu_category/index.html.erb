@@ -1,62 +1,60 @@
 <div class="All-content">
-  <div class="row bg-dark category">
-    <div class="col-3"></div>
-    <div class="col-4 add-category">
+  <div class="Menu-category row">
+    <div class="Add-menu-category col-3">
       <%= form_with(url:"/menu_category" ,
                   method: "post") do |form|
       %>
-      <%= form.text_field :name,
+        <%= form.text_field :name,
                           class: "AddCategory",
                           autocomplete: "off",
                           require: true,
                           placeholder: "Add Category"
         %>
-      <%= form.submit "Add",
-                    class: "btn btn-outline-success AddCategory"
+        <%= form.submit "Add",
+                    class: "btn btn-outline-success Category-button"
         %>
-    <%end%>
-  </div>
-  <div class="col-3 search-box">
-    <%= form_with(url: search_menu_category_path , method: "get") do |form|%>
-      <%= form.text_field :name,
+      <%end%>
+    </div>
+    <div class="Search-menu-category col-3">
+      <%= form_with(url: search_menu_category_path , method: "get") do |form|%>
+        <%= form.text_field :name,
                           class: "SearchCategory",
                           autocomplete: "off",
                           placeholder: "Search"
-      %>
-      <%= form.submit "Search",
-                    class: "btn btn-outline-success Search"
-      %>
-    <%end%>
-  </div>
-</div>
-<div class="row">
-  <% @categories.each do |category|%>
-    <div class="col-3" style="margin:10px">
+        %>
+        <%= form.submit "Search",
+                    class: "btn btn-outline-success Search Category-button"
+        %>
+      <%end%>
     </div>
-    <div class="col-9" style="margin:10px">
-      <div class="Categories row">
-        <div class="col-4">
-          <%= category.name%>
-        </div>
-        <div class="col-3">
-          <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+  </div>
+  <div class="row MenuCategory-items">
+    <% @categories.each do |category|%>
+      <div class="col-9" >
+        <div class="Categories row">
+          <div class="col-4">
+            <%= category.name%>
+          </div>
+          <div class="col-1">
+            <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
                       edit_menu_category_path(category)
-          %>
-        </div>
-        <div class="col-2">
-          <%= form_with(url: "/menu_category/#{category.id}",
-              method:"delete") do
-          %>
-          <%= image_submit_tag( "delete.png",
-                                class: 'Delete-category-image')
             %>
-        <%end%>
+          </div>
+          <div class="col-1">
+            <%= form_with(url: "/menu_category/#{category.id}",
+                method:"delete") do
+            %>
+              <%= image_submit_tag( "delete.png",
+                                class: 'Delete-category-image')
+              %>
+            <%end%>
+          </div>
+        </div>
+        <br>
       </div>
+    <%end%>
+    <div class="pagination">
+      <%== pagy_bootstrap_nav(@pagy).html_safe %>
     </div>
-    <br>
-  <%end%>
-  <div class="pagination">
-    <%== pagy_bootstrap_nav(@pagy).html_safe %>
   </div>
-</div>
 </div>
