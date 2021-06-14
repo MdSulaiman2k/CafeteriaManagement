@@ -1,0 +1,27 @@
+<div class="Add-menu-item col-3">
+      <%= form_with(url:"/menu_item" ,
+                  method: "post") do |form|
+      %>
+        <%= form.text_field :name,
+                          class: "AddItem",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Name"
+        %>
+        <%= form.text_field :description,
+                          class: "AddItem",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Description"
+        %>
+        <%= form.text_field :price,
+                          class: "AddItem",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Price"
+        %>
+        <%= form.submit "Add",
+                    class: "btn btn-outline-success Item-button"
+        %>
+      <%end%>
+</div>

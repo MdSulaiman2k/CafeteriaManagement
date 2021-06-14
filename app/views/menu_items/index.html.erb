@@ -1,6 +1,25 @@
 <div class="All-content">
    <h1 class="heading">Menu Items</h1>
-   <% @items.each do |item|%>
-        <h1><%= item.name%></h1>
-   <%end%>
+   <div class="Search-menu-item col-3">
+      <%= form_with(url: search_menu_item_path , method: "get") do |form|%>
+        <%= form.text_field :name,
+                          class: "SearchItem",
+                          autocomplete: "off",
+                          placeholder: "Search"
+        %>
+        <%= form.submit "Search",
+                    class: "btn btn-outline-success Search Item-button"
+        %>
+      <%end%>
+    </div>
+   <div class="row">
+      <%@items.each do |item|%>
+         <div class="col-3 MenuItems">
+            <h3 class="Item-name"><%= item.name.capitalize()%></h3>
+            <p class="Item-description"><%= item.description %></p>
+            <h4 class="Item-price"> &#x20B9; <%=item.price%></h4>
+            <h4 class="Item-category"><%= MenuCategory.where(id: item.menu_category_id ).first.name%></h4>
+         </div>
+      <%end%>
+   </div>
 </div>
