@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .Categories{
-  margin-top: 1rem;
+  margin-top: 0.1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
@@ -85,13 +85,25 @@
 }
 
 .All-content {
-  margin: 3rem;
+  margin: 2rem;
   margin-left: 5rem;
   margin-right: 0rem;
 }
 
+.Error-content{
+  color: #D8000C;
+  background-color: #FFD2D2;
+  margin: 0.5rem;
+  margin-left: 5rem;
+  padding :0.1rem;
+  display: inline-block;
+  width:300px;
+  padding-left: 1rem;
+
+}
+
 .pagination {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .Edit-Category{

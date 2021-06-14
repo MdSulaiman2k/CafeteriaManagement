@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2021_06_14_140933) do
     t.string "name", null: false
     t.text "description", null: false
     t.decimal "price", null: false
-    t.bigint "menu_categories_id", null: false
+    t.bigint "menu_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["menu_categories_id"], name: "index_menu_items_on_menu_categories_id"
+    t.index ["menu_category_id"], name: "index_menu_items_on_menu_category_id"
   end
 
-  add_foreign_key "menu_items", "menu_categories", column: "menu_categories_id"
+  add_foreign_key "menu_items", "menu_categories"
 end

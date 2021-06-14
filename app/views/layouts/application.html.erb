@@ -10,9 +10,12 @@
   </head>
   <body>
     <%= render 'layouts/navbar'%>
-    <%if flash[:error]%>
-      <p class="Flash-error"> <%= flash[:error] %></p>
-    <%end%>
+      <%if flash[:error]%>
+        <div class="Error-content">
+          <p class="Flash-error"> <%= flash[:error] %></p>
+        </div>
+      <%end%>
+
     <%= yield %>
   </body>
 </html>
