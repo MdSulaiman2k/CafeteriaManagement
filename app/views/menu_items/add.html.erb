@@ -1,27 +1,43 @@
-<div class="Add-menu-item col-3">
-      <%= form_with(url:"/menu_item" ,
+<div class="All-content">
+  <h1 class="headingAddItem">Add Items</h1>
+  <div class="Add-menu-item">
+      <%= form_with(url: menu_items_path,
                   method: "post") do |form|
       %>
+        <label class="AddItemLabel">Name</label>
         <%= form.text_field :name,
                           class: "AddItem",
                           autocomplete: "off",
                           require: true,
                           placeholder: "Item Name"
         %>
-        <%= form.text_field :description,
-                          class: "AddItem",
-                          autocomplete: "off",
-                          require: true,
-                          placeholder: "Item Description"
-        %>
-        <%= form.text_field :price,
+        <label class="AddItemLabel">price</label>
+        <%= form.number_field :price,
                           class: "AddItem",
                           autocomplete: "off",
                           require: true,
                           placeholder: "Item Price"
         %>
-        <%= form.submit "Add",
-                    class: "btn btn-outline-success Item-button"
+        <label class="AddItemLabel">Description</label>
+        <%= form.text_area :description,
+                          class: "AddDescription",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Description"
         %>
-      <%end%>
+        <label class="AddItemLabel">Category</label>
+        <%= select_tag 'category',
+            options_for_select( @menu_categories.collect{ |category| [category.name, category.id] }),
+            class: "Addcategory"
+        %>
+        <abbr title="Add Category">
+          <%= link_to image_tag("add.png", border: 0,class: 'Add-category-image'),
+                                menu_category_index_path,class: "link-tag"
+          %>
+        </abbr>
+        <%= form.submit "Add",
+                  class: "btn btn-outline-success AddButton"
+        %>
+     <%end%>
+  </div>
 </div>

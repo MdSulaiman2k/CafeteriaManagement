@@ -6,13 +6,17 @@
 <div class="main-menu">
   <ul>
     <section class="home">
-      <li class="menu-item">
-      </li>
+      <abbr title="Add Menu Items">
+        <li class="menu-item">
+          <%= link_to image_tag("plus.png", border: 0,class: 'Edit-category-image'),
+                                menu_add_item_path,class: "link-tag"
+          %>
+        </li>
+      <abbr>
       <abbr title="Menu Categories">
         <li class="menu-item">
           <%= link_to image_tag("category.png", border: 0,class: 'Edit-category-image'),
-                               menu_category_index_path,
-                               class: "link-tag"
+                               menu_category_index_path,class: "link-tag"
 
           %>
         </li>
@@ -20,8 +24,7 @@
       <abbr title="Menu Items">
         <li class="menu-item">
           <%= link_to image_tag("fooditem.png", border: 0,class: 'Edit-category-image'),
-                               menu_items_path,
-                               class: "link-tag"
+                               menu_items_path,class: "link-tag"
 
           %>
         </li>

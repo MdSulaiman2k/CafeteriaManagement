@@ -16,4 +16,16 @@ class MenuItemsController < ApplicationController
     end
     render "index"
   end
+
+  def add
+    @menu_categories = MenuCategory.all
+  end
+
+  def create
+    menu_item = MenuItem.new(name: params[:name], description: params[:description], price: params[:price], menu_category_id: params[:category])
+    unless menu_item.save
+      flash[:error] = @menu_category.errors.full_messages.join(", ")
+    end
+    redirect_to menu_add_item_path
+  end
 end

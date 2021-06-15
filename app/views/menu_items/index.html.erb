@@ -1,17 +1,26 @@
 <div class="All-content">
    <h1 class="heading">Menu Items</h1>
-   <div class="Search-menu-item col-3">
-      <%= form_with(url: search_menu_item_path , method: "get") do |form|%>
-        <%= form.text_field :name,
-                          class: "SearchItem",
-                          autocomplete: "off",
-                          placeholder: "Search"
-        %>
-        <%= form.submit "Search",
-                    class: "btn btn-outline-success Search Item-button"
-        %>
-      <%end%>
-    </div>
+   <div class="MenuItemContainer">
+      <div class="Search-menu-item col-3">
+         <%= form_with(url: search_menu_item_path , method: "get") do |form|%>
+            <%= form.text_field :name,
+                                class: "SearchItem",
+                                autocomplete: "off",
+                                placeholder: "Search"
+            %>
+            <%= form.submit "Search",
+                            class: "btn btn-outline-success Search Item-button"
+            %>
+         <%end%>
+      </div>
+      <div class="AddMenu">
+         <abbr title="Add Menu Item">
+            <%= link_to image_tag("plus.png", border: 0,class: 'add_menu_items'),
+                                 menu_add_item_path
+            %>
+          </abbr>
+      </div>
+   </div>
    <div class="row">
       <%@items.each do |item|%>
          <div class="col-3 MenuItems">
@@ -22,4 +31,7 @@
          </div>
       <%end%>
    </div>
+   <div class="pagination">
+      <%== pagy_bootstrap_nav(@pagy).html_safe %>
+    </div>
 </div>
