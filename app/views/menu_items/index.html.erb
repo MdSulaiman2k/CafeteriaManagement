@@ -24,7 +24,22 @@
    <div class="row">
       <%@items.each do |item|%>
          <div class="col-3 MenuItems">
-            <h3 class="Item-name"><%= item.name.capitalize()%></h3>
+            <%= form_with(url: "/menu_items/update/#{item.id}", method: "put") do %>
+               <%= check_box_tag("status", "isActive", item.status == "Active" ? true : false ,
+                              class: "status",
+                              onclick: "this.form.submit()",
+                               )
+               %>
+             <%end%>
+            <div class="status"><%= item.status  %></div>
+            <h3 class="Item-name"><%= item.name.capitalize()%><span class="Edit-items">
+               <abbr title="Add Menu Item">
+                  <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+                                 edit_menu_item_path(item)
+                  %>
+                </abbr>
+               </span>
+            </h3>
             <p class="Item-description"><%= item.description %></p>
             <h4 class="Item-price"> &#x20B9; <%=item.price%></h4>
             <h4 class="Item-category"><%= MenuCategory.where(id: item.menu_category_id ).first.name%></h4>

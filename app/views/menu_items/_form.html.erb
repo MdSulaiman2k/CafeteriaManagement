@@ -1,0 +1,39 @@
+
+        <label class="AddItemLabel">Name</label>
+        <%= form.text_field :name,
+                          class: "AddItem",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Name"
+        %>
+        <label class="AddItemLabel">price</label>
+        <%= form.number_field :price,
+                          class: "AddItem",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Price"
+        %>
+        <label class="AddItemLabel">Description</label>
+        <%= form.text_area :description,
+                          class: "AddDescription",
+                          autocomplete: "off",
+                          require: true,
+                          placeholder: "Item Description"
+        %>
+        <label class="AddItemLabel">Category</label>
+        <% if menu_item.nil?%>
+          <%= form.select(:category,
+              menu_categories.collect{ |category| [category.name, category.id] },
+              {}, { :class => 'Addcategory' })
+          %>
+        <%else%>
+          <%= form.select(:category,
+              menu_categories.collect{ |category| [category.name, category.id] },
+              {},{ :class => 'Addcategory' })
+          %>
+        <%end%>
+        <abbr title="Add Category">
+          <%= link_to image_tag("add.png", border: 0,class: 'Add-category-image'),
+                                menu_category_index_path,class: "link-tag"
+          %>
+        </abbr>

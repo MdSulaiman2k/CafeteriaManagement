@@ -1,0 +1,17 @@
+<div class="All-content">
+  <div class="Edit-Category">
+    <h1 class="heading">Editing Menu Items</h1>
+    <%= form_with(model: @menu_item ) do |form|
+    %>
+        <%= render partial: 'form' ,
+            locals: { form: form , menu_categories: @menu_categories, menu_item: @menu_item }
+        %>
+        <%= form.submit "Edit",
+            class: "btn btn-outline-success AddButton"
+        %>
+    <%end%>
+    <div class="Back-Link">
+      <%= link_to 'Back', menu_items_path %>
+    </div>
+  </div>
+</div>
