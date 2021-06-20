@@ -1,0 +1,59 @@
+<div class="All-content">
+<h2 class="NewUsers-title">
+  Welcome new user!
+</h2>
+<section class="UserNew">
+  <%= form_with url: users_path do |form| %>
+    <div class = "Form-section">
+      <label class="FormInput-label"> First Name* </label>
+      <%= form.text_field :first_name,
+                          class: "Form-input",
+                          autofocus: true,
+                          required: true,
+                          autocomplete: "off"
+      %>
+    </div>
+    <div class = "Form-section">
+      <label class="FormInput-label">
+        Last Name
+      </label>
+      <%= form.text_field :last_name,
+                          class: "Form-input",
+                          autocomplete: "off"
+      %>
+    </div>
+    <div class = "Form-section">
+      <label class="FormInput-label">
+        Email*
+      </label>
+      <%= form.email_field :email,
+                           class: "Form-input",
+                           required: true,
+                           autocomplete: "off"
+      %>
+    </div>
+    <div class = "Form-section">
+      <label class="FormInput-label">Phone number* </label>
+      <%= form.number_field :phone,
+                          class: "Form-input",
+                          autofocus: true,
+                          required: true,
+                          autocomplete: "off"
+      %>
+    </div>
+    <div class = "Form-section">
+      <label class="FormInput-label">
+        Password*
+      </label>
+      <%= form.password_field :password,
+                              class: "Form-input",
+                              required: true,
+                              autocomplete: "off"
+      %>
+    </div>
+    <%= form.submit "Sign-up!",
+                    class: "Form-submit"
+    %>
+  <% end %>
+</section>
+</div>
