@@ -1,0 +1,31 @@
+<div class="All-content">
+  <h2 class="NewUsers-title">
+    Sign-in!
+  </h2>
+  <section class="UserNew">
+    <%= form_with url: sessions_path do |form| %>
+      <div class = "Form-section">
+        <label class="FormInput-label">
+          Email*
+        </label>
+        <%= form.email_field :email,
+                           class: "Form-input",
+                           required: true,
+                           autofocus: true,
+                           autocomplete: "off"
+        %>
+      </div>
+      <div class = "Form-section">
+        <label class="FormInput-label">
+          Password*
+        </label>
+        <%= form.password_field :password,
+                              class: "Form-input" ,
+                              required: true,
+                              autocomplete: "off"
+        %>
+      </div>
+      <%= form.submit "Sign-in!", class: "Form-submit" %>
+    <% end %>
+  </section>
+</div>
