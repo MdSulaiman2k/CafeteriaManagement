@@ -34,6 +34,13 @@
       <div class="col-9" >
         <div class="Categories row">
           <div class="col-4">
+            <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
+               <%= check_box_tag("status", "isActive", category.status ,
+                              class: "status",
+                              onclick: "this.form.submit()",
+                               )
+               %>
+             <%end%>
             <%= link_to  category.name,
                 menu_items_path(item_id: category.id)
             %>

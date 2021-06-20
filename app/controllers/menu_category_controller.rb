@@ -17,7 +17,7 @@ class MenuCategoryController < ApplicationController
 
   def create
     name = params[:name]
-    @menu_category = MenuCategory.new(name: name)
+    @menu_category = MenuCategory.new(name: name, status: true)
     unless @menu_category.save
       flash[:error] = @menu_category.errors.full_messages.join(", ")
     end
@@ -25,6 +25,15 @@ class MenuCategoryController < ApplicationController
   end
 
   def edit
+  end
+
+  def statusupdate
+    id = params[:id]
+    status = params[:status] ? true : false
+    menu_category = MenuCategory.find(id)
+    menu_category.status = status
+    menu_category.save!
+    redirect_to menu_category_index_path
   end
 
   def update
