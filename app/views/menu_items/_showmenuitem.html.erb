@@ -1,18 +1,18 @@
 <% if @current_user.roll != "admin" %>
-  <div class="col-sm-5 col-md-4 col-lg-4 MenuItems">
+  <div class="col-sm-2 col-md-4 col-lg-4 MenuItems">
 <%else%>
-  <div class="col-sm-5 col-md-3 col-lg-3 MenuItems">
+  <div class="col-sm-2 col-md-3 col-lg-3 MenuItems">
 <%end%>
     <% if @current_user.roll == "admin"%>
       <%= form_with(url: "/menu_items/update/#{item.id}", method: "put") do %>
         <%= check_box_tag("status", "isActive", item.status == "Active" ? true : false ,
-                          class: "status",
+                          class: "Active",
                           onclick: "this.form.submit()",
                           )
         %>
       <%end%>
     <%end%>
-    <div class="status"><%= item.status  %></div>
+    <div class='<%= item.status%>'><%= item.status  %></div>
       <h3 class="Item-name"><%= item.name.capitalize()%><span class="Edit-items">
         <% if @current_user.roll == "admin"%>
           <abbr title="Add Menu Item">

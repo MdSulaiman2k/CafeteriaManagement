@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if current_user.roll != "admin"
       redirect_to error_path
     else
-      @pagy, @users = pagy(User.where("roll = ? or roll = ?", "admin", "clerk").order(:id), items: 6)
+      @pagy, @users = pagy(User.where("roll = ? or roll = ?", "admin", "clerk").order(:roll, :id), items: 6)
       render "index"
     end
   end

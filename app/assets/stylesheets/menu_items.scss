@@ -134,13 +134,24 @@
   padding: 0rem 1rem 0rem 2rem;
 }
 
-.status{
+.InActive{
    float: right;
    background-color: #FFD2D2;
    color: red;
    padding : 5px 8px ;
    border-radius: 5px;
 }
+
+.Active{
+  float: right;
+  background-color:  #6dd429 ;
+  color:  white;
+  padding : 5px 8px ;
+  border-radius: 5px;
+
+}
+
+
 
 .carthead{
   display: inline-block;
