@@ -1,38 +1,22 @@
-<nav class="navbar navbar-light bg-success">
-  <div class="container">
-    <a class="navbar-brand" href="#">CafeteriaManagement</a>
+<nav class="navbar navbar-light bg-dark">
+   <div class="container-fluid">
+    <h3 class="navbar-title" >CafeteriaManagement</h3>
     <%if @current_user%>
-      <%= @current_user.name%>
-      <%= link_to "Sign-out", destroy_session_path , method: "delete" %>
+      <div class="nav-items">
+        <%= image_tag "user.png", :class => "user-image" %>
+        <%= link_to @current_user.name.capitalize() , "/users/#{@current_user.id}", class: "link-tag profile"%>
+        <%= form_tag(destroy_session_path , method: "delete",class: "navbar-items link-tag ") do %>
+        <%= submit_tag("Signout" , :class => "btn btn-outline-light") %>
+        <% end %>
+      </div>
     <%end%>
   </div>
+
 </nav>
 <div class="main-menu">
   <ul>
     <section class="home">
-      <abbr title="Add Menu Items">
-        <li class="menu-item">
-          <%= link_to image_tag("plus.png", border: 0,class: 'Edit-category-image'),
-                                menu_add_item_path,class: "link-tag"
-          %>
-        </li>
-      <abbr>
-      <abbr title="Menu Categories">
-        <li class="menu-item">
-          <%= link_to image_tag("category.png", border: 0,class: 'Edit-category-image'),
-                               menu_category_index_path,class: "link-tag"
-
-          %>
-        </li>
-      </abbr>
-      <abbr title="Menu Items">
-        <li class="menu-item">
-          <%= link_to image_tag("fooditem.png", border: 0,class: 'Edit-category-image'),
-                               menu_items_path,class: "link-tag"
-
-          %>
-        </li>
-      </abbr>
+      <%= render 'layouts/setnavbar'%>
     </section>
   </ul>
 </div>

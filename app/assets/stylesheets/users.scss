@@ -10,6 +10,13 @@
   margin-bottom: 30px;
 }
 
+.selection-input{
+   cursor: pointer;
+   padding: 2px 1.5rem 0rem 1.5rem ;
+   border-radius : 3px;
+}
+
+
 .Form-input {
   font-size: 18px;
   padding: 7px;
@@ -19,6 +26,14 @@
   color: #555555 ;
   margin-bottom: 8px;
   display: block;
+}
+
+.Edit-user{
+  float:right;
+  width: 20px;
+  height: 15px;
+  cursor: pointer;
+  margin-right : 17rem;
 }
 
 .Form-submit {
@@ -31,4 +46,89 @@
   color:white;
   border : none ;
   border-radius: 8px;
+}
+
+.username{
+  padding : 0rem 0rem  0rem 2rem;
+  background-color: white ;
+}
+
+.UserContainer{
+  padding : 1.8rem 1rem 1.8rem 1rem;
+  background-color: white ;
+  margin : 2rem 0rem 0rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.UserContainer:hover .Delete-category-image{
+  visibility: visible;
+}
+
+.Account{
+  margin : 0rem 6rem;
+  background-color: rgb(241, 241, 255);
+  width: 700px;
+  height : 350px;
+  padding :3rem;
+}
+
+.Account-content{
+  margin : 1.5rem 2.5rem;
+  background-color: ghostwhite;
+  width : 500px ;
+  height:  200px;
+  border-radius: 8px;
+  padding : 1rem 1rem;
+}
+
+.user-roll{
+   line-height: inherit;
+   font-size: 1.25rem;
+}
+
+.setmargin{
+  margin-left: 3rem;
+  margin-top : 1rem;
+}
+
+.imgmargin{
+  margin-left: 2rem;
+  margin-top :1rem;
+}
+
+.horizontaline{
+  width: 65%;
+  margin-left: 1.5rem;
+  margin-top: 2rem;
+
+}
+
+.modal-body{
+  background-color: white;
+  padding : 2rem;
+  border-radius: 8px;
+}
+
+.formalign{
+  display: inline-block;
+}
+
+.roll{
+  line-height: inherit;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+
+.user-head{
+  line-height: inherit;
+   font-size: 1rem;
+   padding : 0.5rem 0rem 0rem 0rem;
+}
+
+.user-detail{
+  line-height: inherit;
+  font-size: 1rem;
+  padding : 0.5rem 0rem;
 }

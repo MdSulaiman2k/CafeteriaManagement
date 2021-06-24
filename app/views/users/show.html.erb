@@ -1,0 +1,90 @@
+<div class="All-content">
+  <h1 class="heading">My Account</h1>
+  <div class="Account">
+    <h2 class="roll">Roll : <span class="user-roll"><%= @user.roll.capitalize %></span><h2>
+    <div class="Account-content">
+        <h1 class="user-head">Name</h1>
+        <div data-bs-toggle="modal" data-bs-target="#InputName" data-bs-whatever="username">
+          <%= image_submit_tag( "edit.png",
+              class: 'Edit-user')
+          %>
+        </div>
+        <h1 class="user-detail"><%=@user.name.capitalize()%></h1>
+        <h1 class="user-head">Email</h1>
+        <div data-bs-toggle="modal" data-bs-target="#InputEmail" data-bs-whatever="email">
+          <%= image_submit_tag( "edit.png",
+            class: 'Edit-user')
+          %>
+        </div>
+        <h1 class="user-detail"><%= @user.email %></h1>
+        <h1 class="user-head">Phone number</h1>
+        <div data-bs-toggle="modal" data-bs-target="#InputPhonenumber" data-bs-whatever="phonenumber">
+          <%= image_submit_tag( "edit.png",
+            class: 'Edit-user')
+          %>
+        </div>
+        <h1 class="user-detail"><%= @user.phonenumber %></h1>
+    </div>
+</div>
+<div class="container setmargin">
+    <h1 class="heading">Password And Authentication</h1>
+    <button data-bs-toggle="modal" class="btn btn-primary imgmargin" data-bs-target="#InputPassword"
+            data-bs-whatever="email" >Change Password</button>
+    <hr class="horizontaline"/>
+
+    <h1 class="heading">Account Remove</h1>
+    <button data-bs-toggle="modal" class="btn btn-danger imgmargin" data-bs-target="#DeleteAccount"
+          data-bs-whatever="email" >Delete Account</button>
+    <hr class="horizontaline"/>
+</div>
+
+<div class="modal fade" id="InputName" tabindex="-1" aria-labelledby="UserInputLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <%= render partial: "modal", locals: { input: "UserName" , user: @user} %>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="InputEmail" tabindex="-1" aria-labelledby="UserInputLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= render partial: "modal", locals: { input: "Email" , user: @user} %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="InputPhonenumber" tabindex="-1" aria-labelledby="UserInputLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= render partial: "modal", locals: { input: "Phonenumber" , user: @user} %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="InputPassword" tabindex="-1" aria-labelledby="UserInputLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= render partial: "modal", locals: { input: "Password" , user: @user} %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="DeleteAccount" tabindex="-1" aria-labelledby="UserInputLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="UserInputLabel">Delete Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    </div>
+    <div  class="modal-body">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= form_with(url: "/users/#{@user.id}", method:"delete" , class:"formalign") do |form| %>
+            <%= form.submit "Delete Account",
+              class: "btn btn-primary"
+            %>
+        <%end%>
+    </div>
+  </div>
+</div>

@@ -97,12 +97,19 @@
   width:500px;
 }
 
+.Search-container {
+  padding-left: 3rem;
+  width:500px;
+}
+
+
 .SearchItem{
-  width:300px;
+  width:250px;
   height:2.2rem;
   border-radius:5px;
   margin-left: 0.5rem;
   padding-left: 1rem;
+  display: inline-block;
 }
 
 .MenuItemContainer{
@@ -133,4 +140,42 @@
    color: red;
    padding : 5px 8px ;
    border-radius: 5px;
+}
+
+.carthead{
+  display: inline-block;
+  margin-left: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  color : #7e808c;
+}
+
+.cart {
+  display: inline-block;
+  height : 400px;
+  float: right;
+  margin : 0rem 1rem 0rem 0rem;
+}
+
+.addcart{
+  display: inline-block;
+  position: relative;
+  margin: 0rem;
+}
+
+.min{
+  border : 0px ;
+  margin: 0rem;
+  color :red ;
+  cursor: pointer;
+   outline: none ;
+}
+
+.add{
+  border : 0px ;
+  margin: 0rem;
+  color :red ;
+  cursor: pointer;
+  outline: none ;
+
 }

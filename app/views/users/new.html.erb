@@ -1,7 +1,5 @@
 <div class="All-content">
-<h2 class="NewUsers-title">
-  Welcome new user!
-</h2>
+<h1 class="heading"> Create Users</h1>
 <section class="UserNew">
   <%= form_with url: users_path do |form| %>
     <div class = "Form-section">
@@ -51,6 +49,16 @@
                               autocomplete: "off"
       %>
     </div>
+    <%if @current_user  && @current_user.roll == "admin"%>
+      <div class = "Form-section">
+        <label class="FormInput-label">
+          Roll*
+        </label>
+        <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , "user"),
+              {}, { :class => 'btn-outline-dark selection-input'}  )
+        %>
+      </div>
+    <%end%>
     <%= form.submit "Sign-up!",
                     class: "Form-submit"
     %>

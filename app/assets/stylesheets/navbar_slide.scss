@@ -38,3 +38,34 @@ body {
   text-decoration: none;
   font-size: larger;
 }
+
+.profile{
+  color: white;
+  padding: 0rem 1rem 0rem 0rem;
+}
+
+.profile:hover{
+  color: white;
+}
+
+.navbar-container{
+  padding : 0.8rem 5rem ;
+  color : white ;
+}
+
+.navbar-title{
+  display: inline;
+  line-height: inherit;
+  font-size: 1.25rem;
+  color: #ff4c68
+}
+
+.nav-items{
+  float : right ;
+}
+
+.navbar-items{
+  display: inline-block;
+  padding : 0rem 2rem 0rem 0rem ;
+  color : white ;
+}

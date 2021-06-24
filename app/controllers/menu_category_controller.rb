@@ -16,35 +16,54 @@ class MenuCategoryController < ApplicationController
   end
 
   def create
-    name = params[:name]
-    @menu_category = MenuCategory.new(name: name, status: true)
-    unless @menu_category.save
-      flash[:error] = @menu_category.errors.full_messages.join(", ")
+    if current_user.roll != "admin"
+      redirect_to error_path
+    else
+      name = params[:name]
+      @menu_category = MenuCategory.new(name: name, status: true)
+      unless @menu_category.save
+        flash[:error] = @menu_category.errors.full_messages.join(", ")
+      end
+      redirect_to menu_category_index_path
     end
-    redirect_to menu_category_index_path
   end
 
   def edit
+    if current_user.roll != "admin"
+      redirect_to error_path
+    end
   end
 
   def statusupdate
-    id = params[:id]
-    status = params[:status] ? true : false
-    menu_category = MenuCategory.find(id)
-    menu_category.status = status
-    menu_category.save!
-    redirect_to menu_category_index_path
+    if current_user.roll != "admin"
+      redirect_to error_path
+    else
+      id = params[:id]
+      status = params[:status] ? true : false
+      menu_category = MenuCategory.find(id)
+      menu_category.status = status
+      menu_category.save!
+      redirect_to menu_category_index_path
+    end
   end
 
   def update
-    @menu_category.name = menu_category_params["name"]
-    @menu_category.save
-    redirect_to menu_category_index_path
+    if current_user.roll != "admin"
+      redirect_to error_path
+    else
+      @menu_category.name = menu_category_params["name"]
+      @menu_category.save
+      redirect_to menu_category_index_path
+    end
   end
 
   def destroy
-    @menu_category.destroy
-    redirect_to menu_category_index_path
+    if current_user.roll != "admin"
+      redirect_to error_path
+    else
+      @menu_category.destroy
+      redirect_to menu_category_index_path
+    end
   end
 
   private

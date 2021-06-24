@@ -17,5 +17,12 @@
       <%end%>
 
     <%= yield %>
+    <%if @pagy%>
+    <div class="All-content">
+      <div class="pagination">
+        <%== pagy_bootstrap_nav(@pagy).html_safe %>
+      </div>
+    </div>
+    <%end%>
   </body>
 </html>

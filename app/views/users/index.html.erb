@@ -1,0 +1,52 @@
+<div class="All-content">
+  <h1 class="heading">Users</h1>
+  <div class="MenuItemContainer">
+    <%= render partial: "layouts/searchbox", locals:
+      {
+        url_path: search_users_path,
+        place: "Search",
+        method: "get"
+      }
+    %>
+    <div class="AddMenu">
+      <abbr title="Add Users">
+      <%= link_to image_tag("plus.png", border: 0,class: 'add_menu_items'),
+                  new_user_path
+      %>
+      </abbr>
+    </div>
+  </div>
+  <% @users.each do |user|%>
+    <div class="UserContainer row">
+      <div class="username col-sm-2 col-lg-2 col-md-2">
+        <%= user.name%>
+      </div>
+      <div class="col-sm-1 col-lg-3 col-md-3 ">
+       <%= form_with url:"users/roll/#{user.id}" ,  method: :patch  do |form|%>
+          <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , user.roll),
+              {}, { :class => 'btn-outline-dark selection-input'}  )
+          %>
+         <%= form.submit "submit",
+            class: "btn btn-outline-dark btn-sm"
+         %>
+      <%end%>
+      </div>
+      <div class="col-sm-1 col-lg-1 col-md-1">
+        <%= user.phonenumber%>
+      </div>
+      <div class="col-sm-1 col-lg-2 col-md-2">
+        <%= user.email%>
+      </div>
+      <div class="col-sm-1 col-lg-1 col-md-1">
+         <%= form_with(url: "/users/#{user.id}",
+                method:"delete") do
+         %>
+            <%= image_submit_tag( "delete.png",
+                class: 'Delete-category-image')
+            %>
+         <%end%>
+      </div>
+    </div>
+  <%end%>
+
+</div>

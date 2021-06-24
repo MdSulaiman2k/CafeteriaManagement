@@ -1,0 +1,52 @@
+      <%
+        editUser = {
+           "UserName"  => { :topic =>  "Change Your Name", :change => "name" },
+           "Email"  => { :topic =>  "Change Your Email", :change => "email" },
+           "Phonenumber"  => { :topic =>  "Change Your PhoneNumber", :change => "phonenumber" },
+           "Password"  => { :topic => "Change Your Password", :change => "newpassword"}
+        }
+      %>
+      <div class="modal-header">
+        <h5 class="modal-title" id="UserInputLabel"><%= editUser[input][:topic] %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: user) do |form|%>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label"><%= input %>:</label>
+            <% unless input == "Password"%>
+              <%= form.text_field "#{editUser[input][:change]}",
+                                class: "form-control",
+                                id: "recipient-name",
+                                autocomplete: "off",
+                                require: true,
+                                placeholder: "Enter your #{editUser[input][:change]}"
+              %>
+            <%else%>
+              <%= form.password_field "#{editUser[input][:change]}",
+                                class: "form-control",
+                                id: "recipient-name",
+                                autocomplete: "off",
+                                require: true,
+                                placeholder: "New #{editUser[input][:change]}"
+              %>
+            <%end%>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Password:</label>
+            <%=  form.password_field "password",
+                                class: "form-control",
+                                id: "recipient-name",
+                                autocomplete: "off",
+                                require: true,
+                                placeholder: "Enter your password"
+            %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= form.submit "Edit",
+              class: "btn btn btn-primary"
+            %>
+          </div>
+        <%end%>
+      </div>

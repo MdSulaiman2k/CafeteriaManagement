@@ -4,7 +4,13 @@
       <%= form_with(url: menu_items_path,
                   method: "post" ) do |form|
       %>
-        <%= render partial: 'form' , locals: { form: form , menu_categories: @menu_categories, menu_item: nil}%>
+        <%= render partial: 'form' , locals:
+            {
+              form: form,
+              menu_categories: @menu_categories,
+              menu_item: nil
+            }
+        %>
         <%= form.submit "Add",
             class: "btn btn-outline-success AddButton"
         %>

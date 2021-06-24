@@ -1,70 +1,63 @@
 <div class="All-content">
   <h1 class="heading">Menu Category</h1>
   <div class="Menu-category row">
-    <div class="Add-menu-category col-3">
-      <%= form_with(url:"/menu_category" ,
-                  method: "post") do |form|
+    <%if @current_user.roll == "admin"%>
+       <%= render partial: "layouts/searchbox", locals:
+        {
+          url_path: "/menu_category",
+          place: "Add",
+          method: "post",
+        }
       %>
-        <%= form.text_field :name,
-                          class: "AddCategory",
-                          autocomplete: "off",
-                          require: true,
-                          placeholder: "Add Category"
-        %>
-        <%= form.submit "Add",
-                    class: "btn btn-outline-success Category-button"
-        %>
-      <%end%>
-    </div>
-    <div class="Search-menu-category col-3">
-      <%= form_with(url: search_menu_category_path , method: "get") do |form|%>
-        <%= form.text_field :name,
-                          class: "SearchCategory",
-                          autocomplete: "off",
-                          placeholder: "Search"
-        %>
-        <%= form.submit "Search",
-                    class: "btn btn-outline-success Search Category-button"
-        %>
-      <%end%>
-    </div>
+    <%end%>
+    <%= render partial: "layouts/searchbox", locals:
+        {
+          url_path: search_menu_category_path,
+          place: "Search",
+          method: "get",
+        }
+    %>
   </div>
+   <% if @current_user.roll != "admin" %>
+      <%= render :partial => "carts/cartitems"%>
+   <%end%>
   <div class="row MenuCategory-items">
     <% @categories.each do |category|%>
-      <div class="col-9" >
+      <div class="col-7" >
         <div class="Categories row">
           <div class="col-4">
-            <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
-               <%= check_box_tag("status", "isActive", category.status ,
+            <%if @current_user.roll == "admin"%>
+              <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
+                <%= check_box_tag("status", "isActive", category.status ,
                               class: "status",
                               onclick: "this.form.submit()",
-                               )
-               %>
-             <%end%>
+                              )
+                %>
+              <%end%>
+            <%end%>
             <%= link_to  category.name,
                 menu_items_path(item_id: category.id)
             %>
           </div>
-          <div class="col-1">
-            <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+          <%if @current_user.roll == "admin"%>
+            <div class="col-1">
+              <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
                       edit_menu_category_path(category)
-            %>
-          </div>
-          <div class="col-1">
-            <%= form_with(url: "/menu_category/#{category.id}",
-                method:"delete") do
-            %>
-              <%= image_submit_tag( "delete.png",
-                                class: 'Delete-category-image')
               %>
-            <%end%>
-          </div>
+            </div>
+            <div class="col-1">
+              <%= form_with(url: "/menu_category/#{category.id}",
+                method:"delete") do
+              %>
+                <%= image_submit_tag( "delete.png",
+                                class: 'Delete-category-image')
+                %>
+              <%end%>
+            </div>
+          <%end%>
         </div>
         <br>
       </div>
     <%end%>
-    <div class="pagination">
-      <%== pagy_bootstrap_nav(@pagy).html_safe %>
-    </div>
   </div>
 </div>

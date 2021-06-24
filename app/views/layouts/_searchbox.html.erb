@@ -1,0 +1,12 @@
+<div class="Search-container col-3">
+         <%= form_with(url: url_path , method: method) do |form|%>
+            <%= form.text_field :name,
+                                class: "SearchItem",
+                                autocomplete: "off",
+                                placeholder: place
+            %>
+            <%= form.submit place,
+                class: "btn btn-outline-dark Search Item-button"
+            %>
+         <%end%>
+</div>
