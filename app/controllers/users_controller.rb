@@ -108,7 +108,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    puts "\n\n\n\nvaruthu\n\n"
     if current_user.roll != "admin"
       redirect_to error_path
     else
