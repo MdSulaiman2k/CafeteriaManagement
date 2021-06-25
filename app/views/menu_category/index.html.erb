@@ -18,46 +18,44 @@
         }
     %>
   </div>
-   <% if @current_user.roll != "admin" %>
-      <%= render :partial => "carts/cartitems"%>
-   <%end%>
-  <div class="row MenuCategory-items">
-    <% @categories.each do |category|%>
-      <div class="col-7" >
-        <div class="Categories row">
-          <div class="col-4">
-            <%if @current_user.roll == "admin"%>
-              <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
-                <%= check_box_tag("status", "isActive", category.status ,
-                              class: "status",
+  <div class="container my-3">
+    <div class="row">
+      <div class="<%= @current_user.roll == "admin"? "col-lg-8": "col-lg-5"%>">
+        <ul class="list-group list-group-flush">
+          <% @categories.each do |category|%>
+            <%= link_to menu_items_path(item_id: category.id), class: "link-tag" do %>
+              <li class="list-group-item Categories pt-4 bg-light mt-2 pb-3 mb-4">
+                <h1 class="Header alignheader"><%= category.name%></h1>
+                <%if @current_user.roll == "admin"%>
+                    <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+                        edit_menu_category_path(category)
+                    %>
+                    <%= form_with(url: "/menu_category/#{category.id}",
+                        method:"delete") do
+                    %>
+                      <%= image_submit_tag( "delete.png",
+                                class: 'Delete-category-image')
+                      %>
+                    <%end%>
+                    <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
+                      <%= check_box_tag("status", "isActive", category.status ,
+                              class: "Active",
                               onclick: "this.form.submit()",
                               )
-                %>
-              <%end%>
+                      %>
+                    <%end%>
+                <%end%>
+                <div class='<%= category.status? ? "Active" : "InActive"%>'><%= category.status? ? "Active" : "InActive"  %></div>
+              </li>
             <%end%>
-            <%= link_to  category.name,
-                menu_items_path(item_id: category.id)
-            %>
-          </div>
-          <%if @current_user.roll == "admin"%>
-            <div class="col-1">
-              <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
-                      edit_menu_category_path(category)
-              %>
-            </div>
-            <div class="col-1">
-              <%= form_with(url: "/menu_category/#{category.id}",
-                method:"delete") do
-              %>
-                <%= image_submit_tag( "delete.png",
-                                class: 'Delete-category-image')
-                %>
-              <%end%>
-            </div>
           <%end%>
-        </div>
-        <br>
+        </ul>
       </div>
-    <%end%>
+      <% if @current_user.roll != "admin" %>
+        <div class="col-lg-4">
+          <%= render :partial => "carts/cartitems"%>
+        </div>
+      <%end%>
+    </div>
   </div>
 </div>

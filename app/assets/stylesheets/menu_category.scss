@@ -18,6 +18,12 @@
   padding: 1rem;
 }
 
+.list-group-item{
+  border-top : 0px;
+  border-left: 0px;
+  border-right:0px ;
+}
+
 .Edit-category-image {
   width: 20px;
   height: 20px;
@@ -38,6 +44,8 @@
   margin-left: 1rem;
   cursor: pointer;
   visibility: hidden;
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 
@@ -114,10 +122,17 @@
   margin-top: 0.5rem;
 }
 
+.alignheader{
+  display: inline-block;
+}
+
+
+
 .Edit-Category{
   border-radius:5px;
   padding-left: 5px;
   margin-left: 1rem;
+  display: inline-block;
 
 }
 

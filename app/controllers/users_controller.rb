@@ -91,8 +91,12 @@ class UsersController < ApplicationController
       phonenumber: phonenumber,
     )
     if user.save
-      session[:current_user_id] = user.id
-      redirect_to "/"
+      if current_user && current_user.roll == "admin"
+        redirect_to "/users"
+      else
+        session[:current_user_id] = user.id
+        redirect_to "/"
+      end
     else
       flash[:error] = user.errors.full_messages.join(", ")
       redirect_to new_user_path
@@ -108,15 +112,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      if (@user.id == current_user.id)
-        flash[:error] = "Not allowed to delete own account"
-      else
-        @user.destroy
-      end
+    if (@user.id == current_user.id)
+      @user.destroy
+      session[:current_user_id] = nil
+      @current_user = nil
+      redirect_to "/"
+    elsif (current_user.roll == "admin")
+      @user.destroy
       redirect_to "/users"
+    else
+      redirect_to error_path
     end
   end
 
