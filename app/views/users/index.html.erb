@@ -1,11 +1,11 @@
 <div class="All-content">
-  <h1 class="heading">Admin and Clerk</h1>
+  <h1 class="heading">Users</h1>
   <div class="MenuItemContainer container">
     <%= render partial: "layouts/searchbox", locals:
       {
         url_path: search_users_path,
         place: "Search",
-        method: "get"
+        method: "get",
       }
     %>
     <div class="AddMenu">
@@ -16,37 +16,49 @@
       </abbr>
     </div>
   </div>
-  <% @users.each do |user|%>
-    <div class="UserContainer container-fluid row">
-      <div class="username col-sm-2 col-lg-2 col-md-2">
-        <%= user.name%>
-      </div>
-      <div class="col-sm-1 col-lg-3 col-md-3 ">
-       <%= form_with url:"users/roll/#{user.id}" ,  method: :patch  do |form|%>
-          <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , user.roll),
-              {}, { :class => 'btn-outline-dark selection-input'}  )
-          %>
-         <%= form.submit "submit",
-            class: "btn btn-outline-dark btn-sm"
-         %>
-      <%end%>
-      </div>
-      <div class="col-sm-1 col-lg-2 col-md-2">
-        <%= user.phonenumber%>
-      </div>
-      <div class="col-sm-1 col-lg-3 col-md-3">
-        <%= user.email%>
-      </div>
-      <div class="col-sm-1 col-lg-2 col-md-2">
-         <%= form_with(url: "/users/#{user.id}",
-                method:"delete") do
-         %>
-            <%= image_submit_tag( "delete.png",
-                class: 'Delete-category-image')
-            %>
-         <%end%>
-      </div>
+<div class="container bootstrap snippets usertable bootdey">
+    <div class="table-responsive">
+    	<table class="table colored-header datatable project-list">
+    		<thead>
+    			<tr>
+            <th class="heading">Id</th>
+    				<th class="heading">Name</th>
+    				<th class="heading">Email</th>
+    				<th class="heading">Phone Number</th>
+    				<th class="heading">roll</th>
+            <th class="heading">Delete</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+          <% @users.each do |user|%>
+    		    <tr class="tablerow">
+    				  <td><%= user.id %></td>
+    				  <td><%= user.name%></td>
+    				  <td><%= user.email%></td>
+    				  <td><%= user.phonenumber%></td>
+    				  <td>
+                <%= form_with url:"users/roll/#{user.id}" ,  method: :patch  do |form|%>
+                  <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , user.roll),
+                      {}, { :class => 'btn-outline-success selection-input'}  )
+                  %>
+                  <%= form.submit "submit",
+                    class: "btn btn-outline-dark btn-sm"
+                  %>
+                <%end%>
+              </td>
+              <td>
+                <%= form_with(url: "/users/#{user.id}",
+                    method:"delete") do
+                %>
+                  <%= image_submit_tag( "delete.png",
+                      class: 'Delete-category-image')
+                  %>
+                <%end%>
+              </td>
+    			  </tr>
+          <%end%>
+        </tbody>
+    	</table>
     </div>
-  <%end%>
-
+</div>
 </div>

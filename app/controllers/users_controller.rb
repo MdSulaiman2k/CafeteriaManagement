@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if current_user.roll != "admin"
       redirect_to error_path
     else
-      @pagy, @users = pagy(User.where("roll = ? or roll = ?", "admin", "clerk").order(:roll, :id), items: 6)
+      @pagy, @users = pagy(User.order(:name, :id), items: 10)
       render "index"
     end
   end
@@ -36,10 +36,15 @@ class UsersController < ApplicationController
       redirect_to error_path
     else
       name = params[:name]
+      search = params[:search]
       unless name.nil?
-        @pagy, @users = pagy(User.where("roll = ? or roll = ?", "admin", "clerk").where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 6)
+        if (search == "id")
+          @pagy, @users = pagy(User.where("id = ?", name))
+        else
+          @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%'").order(:name, :id), items: 10)
+        end
       else
-        @pagy, @users = pagy(User.where("roll = ? or roll = ?", "admin", "clerk").order(:id), items: 6)
+        @pagy, @users = pagy(User.order(:name, :id), items: 10)
       end
       render "index"
     end

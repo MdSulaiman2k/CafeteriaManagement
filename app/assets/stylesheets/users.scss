@@ -132,3 +132,51 @@
   font-size: 1rem;
   padding : 0.5rem 0rem;
 }
+
+.usertable{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #555;
+  background: #ececec;
+  margin-top:20px;
+  padding-top: 2rem;
+}
+
+.project-list > tbody > tr > td {
+  padding: 12px 8px;
+}
+
+.project-list > tbody > tr > td .avatar {
+  width: 22px;
+  border: 1px solid #CCC;
+}
+
+.selection-user{
+  margin-top: 1rem;
+  border-radius: 5px;
+  margin-left: 2rem;
+}
+
+.categoryheading{
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  word-spacing: 3px;
+  margin-top: 1rem;
+  display: block;
+}
+
+.datatable tr:nth-child(even){background-color: #f2f2f2;}
+
+.datatable tr:hover {background-color: #ddd;}
+
+.datatable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.datatable tr:hover .Delete-category-image{
+  visibility: visible;
+}

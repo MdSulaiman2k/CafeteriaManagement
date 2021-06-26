@@ -8,5 +8,12 @@
             <%= form.submit place,
                 class: "btn btn-outline-dark Search Item-button"
             %>
+            <% if url_path == "/users/search" %>
+                <label class="categoryheading">Search Category </label>
+                <%= form.select(:search, options_for_select([["id" , "id"],["name" , "name"], ["roll" , "roll"],
+                    ["email" , "email"] , ["phonenumber" , "phonenumber"]] , "name"),
+                      {}, { :class => 'btn-outline-dark selection-user'}  )
+                  %>
+            <%end%>
          <%end%>
 </div>
