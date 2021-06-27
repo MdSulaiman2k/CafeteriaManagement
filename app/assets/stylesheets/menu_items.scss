@@ -36,6 +36,7 @@
   border-radius: 5px;
 }
 
+
 .Add-menu-item{
   display: inline;
   padding-left: 3rem;
@@ -148,20 +149,29 @@
    float: right;
    background-color: #FFD2D2;
    color: red;
-   padding : 5px 8px ;
+   padding : 5px 7px ;
    border-radius: 5px;
+   margin-left: 0.3rem;
 }
+
 
 .Active{
   float: right;
   background-color:  #6dd429 ;
   color:  white;
-  padding : 5px 8px ;
+  padding : 5px 7px ;
   border-radius: 5px;
+  margin-left: 0.3rem;
 
 }
 
+.Item-category{
+  float: right;
+}
 
+.text-muted{
+  display: flex;
+}
 
 .carthead{
   display: inline-block;
@@ -170,6 +180,8 @@
   font-size: 32px;
   color : #7e808c;
 }
+
+
 
 .cart {
   display: inline-block;
@@ -198,5 +210,25 @@
   color :red ;
   cursor: pointer;
   outline: none ;
+}
 
+.card-heading{
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  word-spacing: 3px;
+  margin-bottom: 1rem;
+}
+
+.card-header{
+  display: flex;
+}
+
+.card{
+  margin-left: 1rem;
+  margin-top : 2rem;
+  padding: 0.5rem;
+}
+
+.category{
+  float: right;
 }

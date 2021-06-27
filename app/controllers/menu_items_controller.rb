@@ -4,16 +4,16 @@ class MenuItemsController < ApplicationController
   def index
     item = params[:item_id]
     unless (item.nil?)
-      @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 6)
+      @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 10)
     else
-      @pagy, @items = pagy(MenuItem.all.order(:status, :id), items: 6)
+      @pagy, @items = pagy(MenuItem.all.order(:status, :id), items: 10)
     end
   end
 
   def search
     name = params[:name]
     unless name.nil?
-      @pagy, @items = pagy(MenuItem.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 6)
+      @pagy, @items = pagy(MenuItem.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 10)
     end
     render "index"
   end
@@ -51,7 +51,9 @@ class MenuItemsController < ApplicationController
     if current_user.roll != "admin"
       redirect_to error_path
     else
-      menu_item = MenuItem.new(name: params[:name], description: params[:description], price: params[:price], status: "Active", menu_category_id: params[:category])
+      menu_item = MenuItem.new(name: params[:name], description: params[:description],
+                               price: params[:price], status: "Active",
+                               menu_category_id: params[:category])
       unless menu_item.save
         flash[:error] = menu_item.errors.full_messages.join(", ")
       end
@@ -68,6 +70,15 @@ class MenuItemsController < ApplicationController
       menu_item = MenuItem.find(id)
       menu_item.status = status
       menu_item.save!
+      redirect_to menu_items_path
+    end
+  end
+
+  def destroy
+    if current_user.roll != "admin"
+      redirect_to error_path
+    else
+      @menu_item.destroy
       redirect_to menu_items_path
     end
   end

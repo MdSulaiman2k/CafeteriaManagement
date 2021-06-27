@@ -48,6 +48,13 @@
   margin-top: 1rem;
 }
 
+.Delete-category {
+  float:right;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 
 .Menu-category{
   display: inline-flex;
@@ -91,7 +98,7 @@
 }
 
 .Categories:hover {
-  background-color: #f1edf7;
+  background-color: white;
   border-radius : 1rem;
   cursor: pointer;
   color: blue;
@@ -100,6 +107,8 @@
 .Categories:hover .Delete-category-image {
   visibility: visible;
 }
+
+
 
 .All-content {
   margin: 2rem;

@@ -1,35 +1,45 @@
-<% if @current_user.roll != "admin" %>
-  <div class="col-sm-2 col-md-4 col-lg-4 MenuItems">
-<%else%>
-  <div class="col-sm-2 col-md-3 col-lg-3 MenuItems">
-<%end%>
-    <% if @current_user.roll == "admin"%>
-      <%= form_with(url: "/menu_items/update/#{item.id}", method: "put") do %>
-        <%= check_box_tag("status", "isActive", item.status == "Active" ? true : false ,
-                          class: "Active",
-                          onclick: "this.form.submit()",
-                          )
-        %>
-      <%end%>
-    <%end%>
-    <div class='<%= item.status%>'><%= item.status  %></div>
-      <h3 class="Item-name"><%= item.name.capitalize()%><span class="Edit-items">
+<% items.each do |item|%>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="card-heading"><%= item.name.capitalize()%></h1>
         <% if @current_user.roll == "admin"%>
-          <abbr title="Add Menu Item">
-            <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+          <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
                               edit_menu_item_path(item)
+          %>
+          <%= form_with(url: "/menu_items/update/#{item.id}", method: "put") do %>
+            <%= check_box_tag("status", "isActive", item.status == "Active" ? true : false ,
+                      class: "Active",
+                      onclick: "this.form.submit()",
+                      )
             %>
-          </abbr>
+          <%end%>
         <%end%>
-      </h3>
-      <p class="Item-description"><%= item.description %></p>
-      <h4 class="Item-price"> &#x20B9; <%=item.price%></h4>
-      <h4 class="Item-category"><%= MenuCategory.where(id: item.menu_category_id ).first.name%></h4>
-      <% if @current_user.roll != "admin"%>
-        <div class="addcart">
-          <button id="minu1" class="min">-</button>
-          <button class="btn" id="addi1">Add </button>
-          <button id="plus1" class= "add">+</button>
+        <div class='<%= item.status%>'><%= item.status  %></div>
+      </div>
+      <div class="card-body">
+        <h4 class="Item-category"><%= MenuCategory.where(id: item.menu_category_id ).first.name%></h4>
+        <p class="card-text">
+          <%= item.description %>
+        </p>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="card-price">
+          &#8377; <%= item.price%>
         </div>
-      <%end%>
+        <div class="float-end">
+             <% if @current_user.roll == "admin"%>
+              <%= form_with(url: "/menu_items/#{item.id}",
+                      method:"delete") do
+              %>
+                <%= image_submit_tag( "delete.png",
+                  class: 'Delete-category')
+                %>
+              <%end%>
+            <% else%>
+            <%end%>
+          </div>
+      </div>
     </div>
+  </div>
+<%end%>
