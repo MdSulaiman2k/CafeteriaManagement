@@ -116,14 +116,25 @@
   margin-bottom: 3rem;
 }
 
-.AddMenu{
 
+.new-btn{
+  display: inline-block;
+  background-color: #e1eefc;
+  padding: 0rem;
+  padding-right: 10px;
+  color :DarkTurquoise;
+  border-radius: 8px;
+}
+
+.new-btn:hover{
+  color :DarkTurquoise;
 }
 
 .add_menu_items{
   width:2.2rem;
   height:2.2rem;
-  margin-left:31rem;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .headingAddItem{

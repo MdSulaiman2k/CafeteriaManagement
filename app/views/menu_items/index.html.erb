@@ -1,22 +1,27 @@
 <div class="All-content">
    <h1 class="heading">Menu Items</h1>
-   <div class="MenuItemContainer">
-      <%= render partial: "layouts/searchbox", locals:
-          { url_path: search_menu_item_path,
-            place: "Search",
-            method: "get"
-          }
-      %>
-      <%if @current_user.roll == "admin"%>
-         <div class="AddMenu">
-            <abbr title="Add Menu Item">
-               <%= link_to image_tag("plus.png", border: 0,class: 'add_menu_items'),
-                           menu_add_item_path
-               %>
-            </abbr>
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-8 bg-light">
+            <%= render partial: "layouts/searchbox", locals:
+               { url_path: search_menu_item_path,
+                 place: "Search",
+                 method: "get"
+               }
+            %>
          </div>
-      <%end%>
+         <div class="col-lg-4">
+            <%if @current_user.roll == "admin"%>
+               <abbr title="Add Menu Item">
+                  <%= link_to menu_add_item_path, class: "btn new-btn " do %>
+                     <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>New
+                  <%end%>
+               </abbr>
+            <%end%>
+         </div>
+      </div>
    </div>
+
    <% if @current_user.roll != "admin" %>
       <%= render :partial => "carts/cartitems"%>
    <%end%>

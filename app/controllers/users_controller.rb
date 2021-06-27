@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         flash[:error] = "Not allowed to update own account"
       else
         @user.roll = params[:roll]
-        unless @user.save
+        unless @user.save(validate: false)
           flash[:error] = @user.errors.full_messages.join(", ")
         end
       end
@@ -51,28 +51,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    if (current_user.id != @user.id)
-      redirect_to error_path
-    else
-      if (@user.authenticate(user_params["password"]))
-        unless (user_params["name"].nil?)
-          @user.name = user_params["name"]
-        end
-        unless (user_params["email"].nil?)
-          @user.email = user_params["email"]
-        end
-        unless (user_params["phonenumber"].nil?)
-          @user.phonenumber = user_params["phonenumber"]
-        end
-        unless (user_params["newpassword"].nil?)
-          @user.password = user_params["newpassword"]
-        end
-        unless @user.save
-          flash[:error] = @user.errors.full_messages.join(", ")
-        end
-      else
-        flash[:error] = "Incorrect Password"
+    if (@user.authenticate(user_params["password"]))
+      unless (user_params["name"].nil?)
+        @user.name = user_params["name"]
       end
+      unless (user_params["email"].nil?)
+        @user.email = user_params["email"]
+      end
+      unless (user_params["phonenumber"].nil?)
+        @user.phonenumber = user_params["phonenumber"]
+      end
+      @user.password = user_params["password"]
+      unless (user_params["newpassword"].nil?)
+        @user.password = user_params["newpassword"]
+      end
+      unless @user.save
+        flash[:error] = @user.errors.full_messages.join(", ")
+      end
+    else
+      flash[:error] = "Incorrect Password"
     end
     redirect_to "/users/#{@user.id}"
   end
@@ -118,10 +115,15 @@ class UsersController < ApplicationController
 
   def destroy
     if (@user.id == current_user.id)
-      @user.destroy
-      session[:current_user_id] = nil
-      @current_user = nil
-      redirect_to "/"
+      if (@user.authenticate(params[:password]))
+        @user.destroy
+        session[:current_user_id] = nil
+        @current_user = nil
+        redirect_to "/"
+      else
+        flash[:error] = "Incorrect Password"
+        redirect_to "/users/#{current_user.id}"
+      end
     elsif (current_user.roll == "admin")
       @user.destroy
       redirect_to "/users"

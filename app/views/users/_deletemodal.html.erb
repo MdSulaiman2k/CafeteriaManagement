@@ -6,11 +6,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h1 class="heading"><h1>
+         <div class="mb-3">
+            <label for="message-text" class="col-form-label">Password:</label>
+            <%= form_with(url: "/users/#{userid}" , method:"delete" , class:"formalign") do |form| %>
+              <%=  form.password_field "password",
+                                class: "form-control",
+                                id: "recipient-name",
+                                autocomplete: "off",
+                                require: true,
+                                placeholder: "Enter your password"
+              %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= form_with(url: "/users/#{userid}" , method:"delete" , class:"formalign") do |form| %>
+
             <%= form.submit "Delete Account",
               class: "btn btn-primary"
             %>

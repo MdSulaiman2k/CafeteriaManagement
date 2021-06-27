@@ -1,21 +1,26 @@
 <div class="All-content">
   <h1 class="heading">Users</h1>
-  <div class="MenuItemContainer container">
-    <%= render partial: "layouts/searchbox", locals:
-      {
-        url_path: search_users_path,
-        place: "Search",
-        method: "get",
-      }
-    %>
-    <div class="AddMenu">
-      <abbr title="Add Users">
-        <%= link_to image_tag("plus.png", border: 0,class: 'add_menu_items'),
-                  new_user_path
-        %>
-      </abbr>
-    </div>
-  </div>
+     <div class="container">
+      <div class="row">
+         <div class="col-lg-8 bg-light">
+            <%= render partial: "layouts/searchbox", locals:
+               { url_path: search_users_path,
+                 place: "Search",
+                 method: "get"
+               }
+            %>
+         </div>
+         <div class="col-lg-4">
+            <%if @current_user.roll == "admin"%>
+               <abbr title="Add Menu Item">
+                  <%= link_to new_user_path, class: "btn new-btn " do %>
+                     <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>New
+                  <%end%>
+               </abbr>
+            <%end%>
+         </div>
+      </div>
+   </div>
 <div class="container bootstrap snippets usertable bootdey">
     <div class="table-responsive">
     	<table class="table colored-header datatable project-list">
@@ -25,7 +30,7 @@
     				<th class="heading">Name</th>
     				<th class="heading">Email</th>
     				<th class="heading">Phone Number</th>
-    				<th class="heading">roll</th>
+    				<th class="heading">role</th>
             <th class="heading">Delete</th>
     			</tr>
     		</thead>

@@ -10,7 +10,7 @@
             %>
             <% if url_path == "/users/search" %>
                 <label class="categoryheading">Search Category </label>
-                <%= form.select(:search, options_for_select([["id" , "id"],["name" , "name"], ["roll" , "roll"],
+                <%= form.select(:search, options_for_select([["id" , "id"],["name" , "name"], ["role" , "roll"],
                     ["email" , "email"] , ["phonenumber" , "phonenumber"]] , "name"),
                       {}, { :class => 'btn-outline-dark selection-user'}  )
                   %>
