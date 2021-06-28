@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: 404119ad5bf7754c31af41e35935e365c69dcd92
+  specs:
+    data-confirm-modal (1.6.3)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -210,6 +217,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  data-confirm-modal!
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)

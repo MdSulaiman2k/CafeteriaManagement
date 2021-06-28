@@ -30,7 +30,7 @@
         <div class="btn-group">
              <% if @current_user.roll == "admin"%>
               <%= form_with(url: "/menu_items/#{item.id}",
-                      method:"delete") do
+                      method:"delete",data: {confirm: "Are you sure?" }) do
               %>
                 <%= image_submit_tag( "delete.png",
                   class: 'Delete-category')
