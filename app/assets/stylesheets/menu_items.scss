@@ -120,13 +120,16 @@
 
 .new-btn{
   display: inline-block;
-  background-color: #e1eefc;
+  background-color: lightcyan;
   padding: 0rem;
   padding-right: 10px;
   color :DarkTurquoise;
   border-radius: 8px;
 }
 
+.btn-group{
+  margin-left: 2rem;
+}
 .new-btn:hover{
   color :DarkTurquoise;
 }
@@ -196,21 +199,17 @@
   margin: 0rem;
 }
 
-.min{
-  border : 0px ;
-  margin: 0rem;
+.sub{
   color :red ;
   cursor: pointer;
-   outline: none ;
 }
 
 .add{
-  border : 0px ;
-  margin: 0rem;
-  color :red ;
+  color :green ;
   cursor: pointer;
-  outline: none ;
 }
+
+
 
 .card-heading{
   font-size: large;

@@ -12,7 +12,7 @@
          </div>
          <div class="col-lg-4">
             <%if @current_user.roll == "admin"%>
-               <abbr title="Add Menu Item">
+               <abbr title="Add new Users">
                   <%= link_to new_user_path, class: "btn new-btn " do %>
                      <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>New
                   <%end%>

@@ -1,12 +1,12 @@
-<nav class="navbar navbar-light bg-dark">
+<nav class="navbar navbar-light bg-light nav-dark fixed-top">
    <div class="container-fluid">
     <h3 class="navbar-title" >CafeteriaManagement</h3>
     <%if @current_user%>
       <div class="nav-items">
         <%= image_tag "user.png", :class => "user-image" %>
-        <%= link_to @current_user.name.capitalize() , "/users/#{@current_user.id}", class: "link-tag profile"%>
+        <%= link_to @current_user.name.capitalize() , "/users/#{@current_user.id}", class: "link-tag text-dark profile"%>
         <%= form_tag(destroy_session_path , method: "delete",class: "navbar-items link-tag ") do %>
-        <%= submit_tag("Signout" , :class => "btn btn-outline-light") %>
+        <%= submit_tag("Signout" , :class => "btn btn-outline-dark") %>
         <% end %>
       </div>
     <%end%>

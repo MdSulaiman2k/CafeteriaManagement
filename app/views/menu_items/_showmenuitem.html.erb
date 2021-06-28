@@ -1,5 +1,5 @@
 <% items.each do |item|%>
-  <div class="col-lg-4">
+  <div class="<%= @current_user.roll != "admin"? 'col-lg-6' : "col-lg-4"%>">
     <div class="card">
       <div class="card-header">
         <h1 class="card-heading"><%= item.name.capitalize()%></h1>
@@ -27,7 +27,7 @@
         <div class="card-price">
           &#8377; <%= item.price%>
         </div>
-        <div class="float-end">
+        <div class="btn-group">
              <% if @current_user.roll == "admin"%>
               <%= form_with(url: "/menu_items/#{item.id}",
                       method:"delete") do
@@ -37,6 +37,11 @@
                 %>
               <%end%>
             <% else%>
+              <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button"  class="btn btn-outline-danger sub" id="sub<%=item.id%>">-</button>
+                <button type="button" id="item<%=item.id%>" value="0" class="btn btn-outline-primary adding">Add</button>
+                <button type="button" id="add<%=item.id%>"  class="btn btn-outline-success add">+</button>
+              </div>
             <%end%>
           </div>
       </div>
