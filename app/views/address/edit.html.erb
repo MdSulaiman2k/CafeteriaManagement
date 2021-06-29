@@ -1,0 +1,16 @@
+<div class="All-content">
+  <h1 class="heading">Edit Address</h1>
+  <div class="address-content address-container">
+    <%= form_with(model: @address) do |form|%>
+       <%= render partial: "addaddress" , locals: {
+        form: form
+        }
+      %>
+    <div class="col-12">
+        <%= form.submit "Edit Address",
+            class: "btn btn-primary"
+        %>
+      </div>
+    <%end%>
+  </div>
+</div>

@@ -31,7 +31,7 @@
                         edit_menu_category_path(category)
                     %>
                     <%= form_with(url: "/menu_category/#{category.id}",
-                        method:"delete",data: {confirm: "Are you sure?" }) do
+                        method:"delete",data: {confirm: "Are you sure?"}) do
                     %>
                       <%= image_submit_tag( "delete.png",
                                 class: 'Delete-category-image')

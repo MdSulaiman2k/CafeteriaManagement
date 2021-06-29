@@ -1,0 +1,45 @@
+<form class="row g-3">
+  <div class="col-md-5">
+    <label for="inputEmail4" class="form-label">Name</label>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter Name",
+        autocomplete: "off",
+        required: true
+    %>
+  </div>
+  <div class="col-md-5">
+    <label for="inputPassword4" class="form-label">Phone Number</label>
+    <%= form.text_field :phonenumber, class: "form-control", placeholder: "Enter PhoneNumber",
+        autocomplete: "off",
+        required: true,
+        maxlength: 13,
+        minlength: 10
+    %>
+  </div>
+  <div class="col-10">
+    <label for="inputAddress" class="form-label">Street</label>
+    <%= form.text_field :street, class: "form-control", placeholder: "Enter Street",
+        autocomplete: "off",
+        required: true
+    %>
+  </div>
+  <div class="col-md-4">
+    <label for="inputCity" class="form-label">City</label>
+    <%= form.text_field :city, class: "form-control",placeholder: "Enter City",
+        autocomplete: "off",
+        required: true
+    %>
+  </div>
+  <div class="col-md-4">
+    <label for="inputState" class="form-label">State</label>
+    <%= form.select(:state,
+            options_for_select([["Tamil Nadu", "Tamil"]]),
+            {}, { :class => 'form-select' })
+    %>
+  </div>
+  <div class="col-md-2">
+    <label for="inputZip" class="form-label">Zip</label>
+    <%= form.text_field :postal_code, class: "form-control", placeholder: "Enter PostalCode",
+        autocomplete: "off",
+        required: true
+    %>
+  </div>

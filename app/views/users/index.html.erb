@@ -42,7 +42,7 @@
     				  <td><%= user.email%></td>
     				  <td><%= user.phonenumber%></td>
     				  <td>
-                <%= form_with url:"users/roll/#{user.id}" ,  method: :patch  do |form|%>
+                <%= form_with url:"/roll/#{user.id}" ,  method: :patch  do |form|%>
                   <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , user.roll),
                       {}, { :class => 'btn-outline-success selection-input'}  )
                   %>
@@ -52,7 +52,7 @@
                 <%end%>
               </td>
               <td>
-                <%= form_with(url: "/users/#{user.id}",
+                <%= form_with(url: user_path(id: user.id),
                     method:"delete") do
                 %>
                   <%= image_submit_tag( "delete.png",

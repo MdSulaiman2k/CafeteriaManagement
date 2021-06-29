@@ -116,15 +116,20 @@
   margin-right: 0rem;
 }
 
+.address-content {
+  margin: 1rem;
+  margin-left: 5rem;
+  margin-right: 0rem;
+}
+
 .Error-content{
   color: #D8000C;
   background-color: #FFD2D2;
-  margin: 0.5rem;
+  margin: 2.3rem;
   margin-left: 5rem;
-  padding :0.1rem;
+  padding :0.1rem 1rem;
   display: inline-block;
-  width:300px;
-  padding-left: 1rem;
+  position: absolute;
 
 }
 

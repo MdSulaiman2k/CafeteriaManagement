@@ -1,0 +1,16 @@
+<div class="All-content">
+  <h1 class="heading">Address</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 addressboxing">
+        <%= form_with(url: new_address_path, method: "get" ) do |form|%>
+          <%= image_submit_tag("addAddress.png" , class: "AddAddress") %>
+        <%end%>
+        <h2>Add Address</h2>
+      </div>
+      <%= render partial: "addresscontainer", locals: {
+          addresses: @addresses
+      }%>
+    </div>
+  </div>
+</div>

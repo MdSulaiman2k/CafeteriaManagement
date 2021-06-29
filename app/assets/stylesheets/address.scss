@@ -1,0 +1,73 @@
+// Place all the styles related to the address controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.addressboxing{
+  padding: 5rem;
+  padding-left:4.5rem;
+  text-align: center;
+  margin-top: 2rem;
+  border: 2px solid black;
+  border-style: dotted;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  height: 300px;
+}
+
+.addressdiv{
+  margin-top: 2rem;
+  border: 2px solid black;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  height: 300px;
+}
+
+.addresscontent{
+  line-height: 1.5rem;
+  font-size: large;
+  word-spacing: 1px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+
+}
+
+.link{
+  margin-top: 2rem;
+  margin-right:1rem;
+  border-right: 2px solid blue;
+  padding-right: 5px;
+}
+
+.addressheading{
+  font-weight: bold;
+  line-height: 2rem;
+  font-size: large;
+  word-spacing: 3px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+.address-path{
+  margin-right: 10rem;
+}
+
+.default{
+  margin-top : 1rem;
+  padding-left: 8px;
+}
+.form-control{
+  display: inline-block;
+  margin: 1rem;
+}
+
+.AddAddress{
+   width: 5rem;
+}
+
+.form-select{
+  width:300px;
+  height:2.2rem;
+  border-radius:5px;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

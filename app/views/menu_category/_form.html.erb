@@ -1,9 +1,10 @@
 <%= form_with(model: menu_category) do |form| %>
   <div class="field">
-    <%= form.label :name, class: "EditLabel"%>
-    <%= form.text_field :name, class: "EditCategory"%>
+    <%= form.label :name, class: "EditLabel" %>
+    <%= form.text_field :name, class: "EditCategory", required: true%>
     <%= form.submit "Edit",
                     class: "btn btn-outline-success Category-button"
+
     %>
   </div>
 <% end %>

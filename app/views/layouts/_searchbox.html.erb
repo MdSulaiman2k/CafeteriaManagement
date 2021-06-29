@@ -3,7 +3,8 @@
             <%= form.text_field :name,
                                 class: "SearchItem",
                                 autocomplete: "off",
-                                placeholder: place
+                                placeholder: place,
+                                required: true
             %>
             <%= form.submit place,
                 class: "btn btn-outline-dark Search Item-button"

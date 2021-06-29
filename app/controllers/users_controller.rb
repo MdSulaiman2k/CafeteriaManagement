@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, :only => [:create, :new]
-  before_action :set_user, only: %i[ edit show update destroy updateroll ]
+  before_action :set_user, only: %i[ edit update destroy updateroll ]
   skip_before_action :verify_authenticity_token
 
   def index
@@ -13,6 +13,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    puts "\n\n\n#{current_user.id == params[:id]}#{current_user.id}#{params[:id]}\n\n"
+    if current_user.id == Integer(params[:id])
+      set_user
+    else
+      redirect_to error_path
+    end
   end
 
   def updateroll
