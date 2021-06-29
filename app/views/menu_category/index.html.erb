@@ -20,36 +20,65 @@
   </div>
   <div class="container my-3">
     <div class="row">
-      <div class="<%= @current_user.roll == "admin"? "col-lg-8": "col-lg-5"%>">
-        <ul class="list-group list-group-flush">
-          <% @categories.each do |category|%>
-            <%= link_to menu_items_path(item_id: category.id), class: "link-tag" do %>
-              <li class="list-group-item Categories pt-4  bg-light mt-2 pb-3 mb-4">
-                <h1 class="Header alignheader"><%= category.name%></h1>
-                <%if @current_user.roll == "admin"%>
-                    <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
-                        edit_menu_category_path(category)
-                    %>
-                    <%= form_with(url: "/menu_category/#{category.id}",
-                        method:"delete",data: {confirm: "Are you sure?"}) do
-                    %>
-                      <%= image_submit_tag( "delete.png",
-                                class: 'Delete-category-image')
-                      %>
-                    <%end%>
-                    <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
-                      <%= check_box_tag("status", "isActive", category.status ,
-                              class: "Active",
+      <div class="<%= @current_user.roll == "admin"? "col-lg-12": "col-lg-8 border-right"%>">
+        <div class="container bootstrap snippets usertable bootdey">
+          <div class="table-responsive">
+    	      <table class="table colored-header datatable project-list">
+    		      <thead>
+    			      <tr>
+                  <%if @current_user.roll == "admin"%>
+                    <th class="heading">Id</th>
+                  <%end%>
+    				      <th class="heading">Name</th>
+    				      <th class="heading">Active</th>
+                  <%if @current_user.roll == "admin"%>
+    				        <th class="heading">Update</th>
+                  <%end%>
+    			      </tr>
+    		      </thead>
+    		      <tbody>
+                <% @categories.each do |category|%>
+                  <tr class="tablerow">
+                      <%if @current_user.roll == "admin"%>
+                        <td><%= category.id %></td>
+                      <%end%>
+                      <td>
+                        <%= link_to category.name, menu_items_path(item_id: category.id), class: "link-tag" %>
+                      </td>
+                      <td>
+                        <%if @current_user.roll == "admin"%>
+                          <%= form_with(url: "/menu_category/update/#{category.id}", method: "put") do %>
+                            <%= check_box_tag("status", "isActive", category.status ,
+                              class: "Active-category d-flex",
                               onclick: "this.form.submit()",
                               )
-                      %>
-                    <%end%>
+                            %>
+                          <%end%>
+                        <%end%>
+                        <h1 class='<%= category.status? ? "Active-category" : "InActive-category"%>'>
+                          <%= category.status? ? "Active" : "InActive"  %>
+                        </h1>
+                      </td>
+                      <td class="d-flex">
+                        <%if @current_user.roll == "admin"%>
+                          <%= link_to image_tag("edit.png", border: 0,class: 'Edit-category-image'),
+                              edit_menu_category_path(category)
+                          %>
+                          <%= form_with(url:"/menu_category/#{category.id}",
+                              method:"delete",data: {confirm: "Are you sure?"}) do
+                          %>
+                            <%= image_submit_tag( "delete.png",
+                              class: 'Delete-category-image')
+                            %>
+                          <%end%>
+                        <%end%>
+                      </td>
+                  </tr>
                 <%end%>
-                <div class='<%= category.status? ? "Active" : "InActive"%>'><%= category.status? ? "Active" : "InActive"  %></div>
-              </li>
-            <%end%>
-          <%end%>
-        </ul>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <% if @current_user.roll != "admin" %>
         <div class="col-lg-4">
