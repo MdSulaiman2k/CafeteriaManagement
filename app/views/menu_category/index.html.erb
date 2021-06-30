@@ -20,7 +20,7 @@
   </div>
   <div class="container my-3">
     <div class="row">
-      <div class="<%= @current_user.roll == "admin"? "col-lg-12": "col-lg-8 border-right"%>">
+      <div class="<%= @current_user.roll == "admin"? "col-lg-12": "col-lg-8"%>">
         <div class="container bootstrap snippets usertable bootdey">
           <div class="table-responsive">
     	      <table class="table colored-header datatable project-list">
@@ -81,7 +81,7 @@
         </div>
       </div>
       <% if @current_user.roll != "admin" %>
-        <div class="col-lg-4">
+        <div class="col-lg-4 sticky-right">
           <%= render :partial => "carts/cartitems"%>
         </div>
       <%end%>

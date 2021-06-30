@@ -3,15 +3,15 @@ class MenuCategoryController < ApplicationController
   before_action :set_menu_category, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 5)
+    @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 10)
   end
 
   def search
     name = params[:name]
     unless name.nil?
-      @pagy, @categories = pagy(MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%'").order(:status => :desc, :id => :asc), items: 5)
+      @pagy, @categories = pagy(MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%'").order(:status => :desc, :id => :asc), items: 10)
     else
-      @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 5)
+      @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 10)
     end
     render "index"
   end
