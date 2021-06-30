@@ -11,10 +11,11 @@
   <body>
      <%= render 'layouts/navbar'%>
       <%if flash[:error]%>
-        <div class="Error-content">
-          <p class="Flash-error"> <%= flash[:error] %></p>
-        </div>
+          <p class="alert alert-danger"> <%= flash[:error] %></p>
       <%end%>
+      <% if flash[:success]%>
+        <p class="alert alert-success"><%= flash[:success] %></p>
+      <% end %>
 
     <%= yield %>
     <%if @pagy%>

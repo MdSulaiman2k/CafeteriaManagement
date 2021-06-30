@@ -1,4 +1,5 @@
 class MenuItemsController < ApplicationController
+  before_action :ensure_admin_in, only: %i[add create edit statusupdate update destroy]
   before_action :set_menu_item, only: %i[ edit update destroy ]
 
   def index
@@ -19,68 +20,46 @@ class MenuItemsController < ApplicationController
   end
 
   def add
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      @menu_categories = MenuCategory.all
-    end
+    @menu_categories = MenuCategory.all
   end
 
   def edit
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      [@menu_categories = MenuCategory.all, @menu_item]
-    end
+    @menu_categories = MenuCategory.all
   end
 
   def update
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      @menu_item.name = menu_item_params["name"]
-      @menu_item.price = menu_item_params["price"]
-      @menu_item.description = menu_item_params["description"]
-      @menu_item.menu_category_id = menu_item_params[:category]
-      @menu_item.save
-      redirect_to menu_items_path
-    end
+    @menu_item.name = menu_item_params["name"]
+    @menu_item.price = menu_item_params["price"]
+    @menu_item.description = menu_item_params["description"]
+    @menu_item.menu_category_id = menu_item_params[:category]
+    @menu_item.save
+    redirect_to menu_items_path
   end
 
   def create
-    if current_user.roll != "admin"
-      redirect_to error_path
+    menu_item = MenuItem.new(name: params[:name], description: params[:description],
+                             price: params[:price], status: "Active",
+                             menu_category_id: params[:category])
+    unless menu_item.save
+      flash[:error] = menu_item.errors.full_messages.join(", ")
     else
-      menu_item = MenuItem.new(name: params[:name], description: params[:description],
-                               price: params[:price], status: "Active",
-                               menu_category_id: params[:category])
-      unless menu_item.save
-        flash[:error] = menu_item.errors.full_messages.join(", ")
-      end
-      redirect_to menu_add_item_path
+      flash[:success] = "#{params[:name]} is created"
     end
+    redirect_to menu_add_item_path
   end
 
   def statusupdate
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      id = params[:id]
-      status = params[:status] ? "Active" : "InActive"
-      menu_item = MenuItem.find(id)
-      menu_item.status = status
-      menu_item.save!
-      redirect_to menu_items_path
-    end
+    id = params[:id]
+    status = params[:status] ? "Active" : "InActive"
+    menu_item = MenuItem.find(id)
+    menu_item.status = status
+    menu_item.save!
+    redirect_to menu_items_path
   end
 
   def destroy
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      @menu_item.destroy
-      redirect_to menu_items_path
-    end
+    @menu_item.destroy
+    redirect_to menu_items_path
   end
 
   private

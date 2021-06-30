@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, :only => [:create, :new]
+  before_action :ensure_admin_in, :only => [:index, :updateroll, :search]
   before_action :set_user, only: %i[ edit update destroy updateroll ]
   skip_before_action :verify_authenticity_token
 
   def index
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      @pagy, @users = pagy(User.order(:name, :id), items: 10)
-      render "index"
-    end
+    @pagy, @users = pagy(User.order(:name, :id), items: 10)
+    render "index"
   end
 
   def show
@@ -22,38 +19,30 @@ class UsersController < ApplicationController
   end
 
   def updateroll
-    if current_user.roll != "admin"
-      redirect_to error_path
+    if (@user.id == current_user.id)
+      flash[:error] = "Not allowed to update own account"
     else
-      if (@user.id == current_user.id)
-        flash[:error] = "Not allowed to update own account"
-      else
-        @user.roll = params[:roll]
-        unless @user.save(validate: false)
-          flash[:error] = @user.errors.full_messages.join(", ")
-        end
+      @user.roll = params[:roll]
+      unless @user.save(validate: false)
+        flash[:error] = @user.errors.full_messages.join(", ")
       end
-      redirect_to "/users"
     end
+    redirect_to "/users"
   end
 
   def search
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      name = params[:name]
-      search = params[:search]
-      unless name.nil?
-        if (search == "id")
-          @pagy, @users = pagy(User.where("id = ?", name))
-        else
-          @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%'").order(:name, :id), items: 10)
-        end
+    name = params[:name]
+    search = params[:search]
+    unless name.nil?
+      if (search == "id")
+        @pagy, @users = pagy(User.where("id = ?", name))
       else
-        @pagy, @users = pagy(User.order(:name, :id), items: 10)
+        @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%'").order(:name, :id), items: 10)
       end
-      render "index"
+    else
+      @pagy, @users = pagy(User.order(:name, :id), items: 10)
     end
+    render "index"
   end
 
   def update
@@ -108,14 +97,6 @@ class UsersController < ApplicationController
     else
       flash[:error] = user.errors.full_messages.join(", ")
       redirect_to new_user_path
-    end
-  end
-
-  def edit
-    if current_user.roll != "admin"
-      redirect_to error_path
-    else
-      @user
     end
   end
 

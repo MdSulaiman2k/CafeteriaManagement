@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
       nil
     end
   end
+
+  def ensure_admin_in
+    unless current_user.roll == "admin"
+      redirect_to error_path
+    end
+  end
 end
