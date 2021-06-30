@@ -1,3 +1,155 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#addcart{
+  display: inline-block;
+  position: relative;
+  top : -18px;
+}
+
+.carthead{
+  display: inline-block;
+  margin-left: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  color : #7e808c;
+}
+
+
+
+#cartitems{
+  display: block;
+}
+
+#itemsamount{
+   width :330px;
+   overflow: scroll;
+  //  overflow-x: hidden;
+   height: 300px;
+   padding-top: 2rem;
+   padding-left: 2rem;
+}
+
+.singleitem{
+  display: flex;
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.cartquantity{
+  margin-left: 1rem;
+  padding: 5px;
+  padding-top: 5px;
+  border-radius: 2px;
+}
+
+.cartprice{
+  margin-left:1rem;
+  padding-top: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.itemname{
+  display: inline-block;
+  margin-left : 20px;
+  width : 120px;
+  font-family: 'Roboto', sans-serif;
+  font-size : 15px;
+  padding-top: 5px;
+}
+
+.itemprice{
+ display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size : 15px;
+  margin-left: 20px ;
+  padding-top: 5px;
+
+}
+
+#subtn {
+  background-color:#599bb3;
+     border-radius:8px;
+     border:2px solid #29668f;
+     display:inline-block;
+     cursor:pointer;
+     color:#ffffff;
+     font-family:Courier New;
+     font-size:20px;
+     font-weight:bold;
+     padding:15px 76px;
+     text-decoration:none;
+     text-shadow:0px 0px 0px #3d768a;
+     margin-left : 24px;
+ }
+
+ #subtn:hover {
+      border-color: white ;
+      background-color:#60b246;
+ }
+
+ .cart-container{
+     display: relative ;
+     width :330px;
+     overflow: scroll;
+     overflow-x: hidden;
+     height: 300px;
+ }
+
+ #itemname{
+     display: inline-block;
+     margin-left : 20px;
+     width : 120px;
+     font-family: 'Roboto', sans-serif;
+     font-size : 15px;
+ }
+
+ .cartname{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-right: 10px;
+  padding-top: 5px;
+ }
+
+
+ #itemprice{
+    display: inline-block;
+     font-family: 'Roboto', sans-serif;
+     font-size : 15px;
+     margin-left: 20px ;
+
+ }
+
+ .itemsno{
+     display: inline-block;
+ }
+
+
+ #heading{
+   margin : 0px;
+   margin-left :10px;
+   display: inline-block;
+   padding-top: 25px ;
+   padding-left:30px ;
+   font-family: 'Fredoka One', cursive;
+   font-size :20px;
+   color:#ffa700;
+   color :#fc8019;
+ }
+
+ .subtotal{
+  font-weight: bold;
+  margin-right:1rem;
+  margin-bottom: 0.7rem;
+  font-family: 'Roboto', sans-serif;
+  display: inline;
+
+ }
+
+.totalcart{
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
