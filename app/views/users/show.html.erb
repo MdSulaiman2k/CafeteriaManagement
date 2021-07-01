@@ -1,12 +1,5 @@
 <div class="All-content">
   <h1 class="heading">My Account</h1>
-  <div class="float-end address-path">
-    <abbr title="Add Address">
-      <%= link_to address_index_path, class: "btn new-btn " do %>
-        <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>Add Address
-      <%end%>
-    </abbr>
-  </div>
   <div class="Account">
     <h2 class="roll">Role : <span class="user-roll"><%= @user.roll.capitalize %></span><h2>
     <div class="Account-content">

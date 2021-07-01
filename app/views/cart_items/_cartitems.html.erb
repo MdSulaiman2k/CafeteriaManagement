@@ -17,9 +17,9 @@
   </div>
 </div>
 <div>
-  <form action="checkout.html">
-    <button id="subtn" class="cartsubmit" type="submit">Checkout</button>
-  </form>
+  <%= link_to address_index_path, id: "subtn" do %>
+        Checkout
+  <%end%>
 </div>
 <%else%>
   <h1 class="carthead" >Empty Cart</h1>
