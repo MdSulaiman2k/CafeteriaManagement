@@ -1,6 +1,7 @@
 class MenuItemsController < ApplicationController
   before_action :ensure_admin_in, only: %i[add create edit statusupdate update destroy]
   before_action :set_menu_item, only: %i[ edit update destroy ]
+  before_action :set_cart_items, only: %i[index search]
 
   def index
     item = params[:item_id]
@@ -71,4 +72,5 @@ class MenuItemsController < ApplicationController
   def menu_item_params
     params.require(:menu_item).permit(:name, :price, :description, :category)
   end
+
 end

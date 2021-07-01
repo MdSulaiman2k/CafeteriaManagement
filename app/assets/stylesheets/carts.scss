@@ -34,6 +34,8 @@
   display: flex;
   padding: 1rem;
   padding-bottom: 0.5rem;
+  border-top: 1px solid #d4d4d4;;
+  border-bottom: 1px solid #d4d4d4;
 }
 
 .cartquantity{
@@ -146,10 +148,25 @@
   margin-bottom: 0.7rem;
   font-family: 'Roboto', sans-serif;
   display: inline;
+  margin-right: 5rem;
+  font-size: large;
+ }
 
+ .cartTotaldiv{
+   display: flex;
+   margin-bottom: 0.5rem;
+   padding-left: 4rem;
+   padding-top: 3px;
  }
 
 .totalcart{
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
+  font-size: large;
+}
+
+
+.adding{
+  width: 40px;
+  padding: 0rem;
 }

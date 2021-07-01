@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :addresses, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
   validates :roll, presence: true
   validates_acceptance_of :roll, accept: ["admin", "user", "clerk"]
   validates :email, presence: true

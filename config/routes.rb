@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   delete "/signout" => "session#destroy", as: :destroy_session
   patch "/roll/:id" => "users#updateroll"
   patch "/address/editdefault/:id" => "address#set_default", as: :edit_defaultaddress
+  patch "/cart_items/quantity" => "cart_items#updatequantity", as: :cart_quantity_update
   resources :users
   resources :menu_category
   resources :menu_items
   resources :address
+  resources :cart_items
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

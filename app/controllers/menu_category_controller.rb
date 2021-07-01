@@ -1,6 +1,7 @@
 class MenuCategoryController < ApplicationController
   before_action :ensure_admin_in, only: %i[create edit statusupdate update destroy]
   before_action :set_menu_category, only: %i[ show edit update destroy ]
+  before_action :set_cart_items, only: %i[index search]
 
   def index
     @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 10)

@@ -1,13 +1,26 @@
+<%unless(@cartitems.empty?)%>
 <h1 class="carthead" >Cart</h1>
 <div id="cartitems" >
   <div id="itemsamount">
+    <% @cartitems.each  do |item|%>
+      <div class='singleitem' >
+        <h1 class='itemname'> <%= item.menu_item_name %>  </h1>
+        <p  class='cartquantity btn-primary'><%= item.quantity %> </p>
+        <p  class='itemprice'> <%= item.menu_item_price %> </p>
+      </div>
+    <%end%>
 
   </div>
+  <div class="cartTotaldiv">
   <h3 id="itemtotal" class="subtotal">Subtotal</h3>
-  <h4 id="totalamount" class="totalcart"></h4>
+  <h4 id="totalamount" class="totalcart"><%= @totalamount %></h4>
+  </div>
 </div>
 <div>
   <form action="checkout.html">
     <button id="subtn" class="cartsubmit" type="submit">Checkout</button>
   </form>
 </div>
+<%else%>
+  <h1 class="carthead" >Empty Cart</h1>
+<%end%>

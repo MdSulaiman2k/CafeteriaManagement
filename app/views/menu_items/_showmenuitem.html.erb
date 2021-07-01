@@ -37,11 +37,29 @@
                 %>
               <%end%>
             <% elsif(item.status == "Active")%>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button"  class="btn btn-outline-danger sub" id="sub<%=item.id%>">-</button>
-                <button type="button" id="item<%=item.id%>" value="0" class="btn btn-outline-primary adding">0</button>
-                <button type="button" id="add<%=item.id%>"  class="btn btn-outline-success add">+</button>
-              </div>
+              <%
+                value = 0
+                  @cartitems.each do |cartitem|
+                     if(cartitem.menu_item_id == item.id)
+                       value = cartitem.quantity
+                     end
+                  end
+                %>
+                <% if(value == 0)%>
+                  <%= form_with(url: cart_items_path(item_id: item.id , value: value ), method: "post") do |f| %>
+                    <%= f.submit "add", class: "btn btn-outline-primary additem", id: "add#{item.id}" %>
+                  <% end %>
+                <%else%>
+                  <div class="btn-group" role="group" aria-label="Basic outlined example">
+                  <%= form_with(url:cart_quantity_update_path(item_id: item.id, value: value ), method: "patch") do |f| %>
+                    <%= f.submit "-", class: "btn btn-outline-danger sub", id: "sub#{item.id}" %>
+                  <% end %>
+                  <input type="input" id="item<%=item.id%>" value="<%=value%>" class="btn btn-outline-primary adding">
+                  <%= form_with(url: cart_items_path(item_id: item.id , value: value ), method: "post") do |f| %>
+                    <%= f.submit "+", class: "btn btn-outline-success add", id: "add#{item.id}" %>
+                  <% end %>
+                 </div>
+                <%end%>
             <%end%>
           </div>
       </div>

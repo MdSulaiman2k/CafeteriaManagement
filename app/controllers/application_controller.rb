@@ -24,4 +24,12 @@ class ApplicationController < ActionController::Base
       redirect_to error_path
     end
   end
+
+  def set_cart_items
+    @cartitems = CartItem.where("user_id = ? ", current_user.id)
+    @totalamount = 0
+    @cartitems.each do |item|
+      @totalamount += item.menu_item_price * item.quantity
+    end
+  end
 end

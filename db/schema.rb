@@ -30,14 +30,15 @@ ActiveRecord::Schema.define(version: 2021_06_30_084714) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.string "menu_items_name"
-    t.string "menu_items_price"
-    t.bigint "menu_items_id", null: false
-    t.bigint "users_id", null: false
+    t.string "menu_item_name", null: false
+    t.decimal "menu_item_price", null: false
+    t.integer "quantity", null: false
+    t.bigint "menu_item_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["menu_items_id"], name: "index_cart_items_on_menu_items_id"
-    t.index ["users_id"], name: "index_cart_items_on_users_id"
+    t.index ["menu_item_id"], name: "index_cart_items_on_menu_item_id"
+    t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
 
   create_table "menu_categories", force: :cascade do |t|
@@ -71,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_06_30_084714) do
   end
 
   add_foreign_key "addresses", "users"
-  add_foreign_key "cart_items", "menu_items", column: "menu_items_id"
-  add_foreign_key "cart_items", "users", column: "users_id"
+  add_foreign_key "cart_items", "menu_items"
+  add_foreign_key "cart_items", "users"
   add_foreign_key "menu_items", "menu_categories"
 end
