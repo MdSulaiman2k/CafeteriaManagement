@@ -7,7 +7,7 @@
           <h2>Phone number: <%= orderAddress.phonenumber%></h2>
         </label>
       </div>
-      <div class="<%=  @current_user.roll == "admin"? "col-lg-7" : "col-lg-8" %> order-status ">
+      <div class="<%=  @current_user.roll == "admin" || @current_user.roll == "clerk"? "col-lg-7" : "col-lg-8" %> order-status ">
         <ul class="list-group p-3 bg-light">
           <li class="list-group-item list-group-flush card-header bg-light head">
             <%="Order#{@current_user.id}#{order.id}"%>
@@ -19,7 +19,7 @@
           <li class="list-group-item bg-light"><h1 class="head-question">Total: </h1><%= totalAmount%></li>
         </ul>
       </div>
-      <% if @current_user.roll == "admin" and order.delivered_at.nil? %>
+      <% if (@current_user.roll == "admin" or @current_user.roll == "clerk") and order.delivered_at.nil? %>
       <div class="col-lg-2 statusupdate">
       <%= form_with(url: update_pending_status_path(id: order.id), method: "patch") do |form|%>
         <%= form.submit "Update Status" , class: "btn btn-primary" %>
