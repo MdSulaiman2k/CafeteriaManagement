@@ -28,7 +28,7 @@
           %>
         <%else%>
           <%= form.select(:category,
-            options_for_select(menu_categories.collect{ |category| [category.name, category.id] }),
+            options_for_select(menu_categories.collect{ |category| [category.name , category.id] }),
             {}, { :class => 'Addcategory' })
           %>
         <%end%>

@@ -1,0 +1,7 @@
+<div class="All-content">
+  <h1 class="heading"><%="Your " unless  @current_user.roll == "admin" %>Orders</h1>
+  <% @orders.each do |order|%>
+      <%= order.id%>
+  <%end%>
+
+</div>

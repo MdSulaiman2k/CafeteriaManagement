@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   patch "/roll/:id" => "users#updateroll"
   patch "/address/editdefault/:id" => "address#set_default", as: :edit_defaultaddress
   patch "/cart_items/quantity" => "cart_items#updatequantity", as: :cart_quantity_update
+  get "/order_items/shiftcart" => "order_items#shift_cart_to_order", as: :shift_cart_order
   resources :users
   resources :menu_category
   resources :menu_items
   resources :address
   resources :cart_items
   resources :orders
+  resources :order_items
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
