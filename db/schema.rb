@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
     t.string "postal_code", null: false
     t.string "phonenumber", null: false
     t.boolean "defaultaddress", null: false
+    t.datetime "archived_on"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -61,14 +62,13 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.bigint "menu_item_id", null: false
+    t.integer "menu_item_id", null: false
     t.bigint "order_id", null: false
     t.string "menu_item_name", null: false
     t.decimal "menu_item_price", null: false
     t.integer "quantity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["menu_item_id"], name: "index_order_items_on_menu_item_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
   add_foreign_key "cart_items", "menu_items"
   add_foreign_key "cart_items", "users"
   add_foreign_key "menu_items", "menu_categories"
-  add_foreign_key "order_items", "menu_items"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"

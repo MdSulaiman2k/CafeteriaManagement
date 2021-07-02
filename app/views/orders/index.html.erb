@@ -1,7 +1,42 @@
 <div class="All-content">
   <h1 class="heading"><%="Your " unless  @current_user.roll == "admin" %>Orders</h1>
-  <% @orders.each do |order|%>
-      <%= order.id%>
+  <%if @current_user.roll == "admin"%>
+  <div class="container">
+    <div class="row">
+         <div class="col-lg-8 bg-light">
+            <%= form_with(url: search_orders_path , method: "get") do |form|%>
+            <%= form.text_field :id,
+                                class: "SearchItem",
+                                autocomplete: "off",
+                                placeholder: "Enter User_id",
+                                required: true
+            %>
+            <%= form.submit "Search",
+                class: "btn btn-outline-dark Search Item-button"
+            %>
+            <%end%>
+         </div>
+    </div>
+  </div>
   <%end%>
+  <div class="container">
+  <%if @orders %>
+  <% @orders.each do |order|%>
+
+  <%orderAddress = order.address%>
+  <% totalAmount = 0 %>
+  <% order.order_items.each do |item| %>
+    <% totalAmount += item.menu_item_price * item.quantity %>
+  <%end%>
+    <%= render partial: "orders", locals: {
+       orderAddress: orderAddress,
+       order: order,
+       totalAmount: totalAmount
+    } %>
+  <%end%>
+  <%else%>
+    <h1 class="m-3 alert alert-danger">No user Id Found</h1>
+  <%end%>
+  </div>
 
 </div>

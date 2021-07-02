@@ -8,6 +8,7 @@ class CreateAddresses < ActiveRecord::Migration[6.1]
       t.string :postal_code, null: false
       t.string :phonenumber, null: false
       t.boolean :defaultaddress, null: false
+      t.datetime :archived_on
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
