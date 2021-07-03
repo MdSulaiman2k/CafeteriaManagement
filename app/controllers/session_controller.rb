@@ -6,7 +6,7 @@ class SessionController < ApplicationController
 
   def create
     email = params[:email]
-    user = User.find_by(email: email)
+    user = User.where("email = ? and archived_on is NULL", email).first
     if user && user.authenticate(params[:password])
       session[:current_user_id] = user.id
       redirect_to "/"

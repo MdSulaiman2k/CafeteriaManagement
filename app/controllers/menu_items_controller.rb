@@ -7,16 +7,16 @@ class MenuItemsController < ApplicationController
     item = params[:item_id]
     @categorie_name = params[:category_name]
     unless (item.nil?)
-      @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 10)
+      @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 12)
     else
-      @pagy, @items = pagy(MenuItem.all.order(:status, :id), items: 10)
+      @pagy, @items = pagy(MenuItem.all.order(:status, :id), items: 12)
     end
   end
 
   def search
     name = params[:name]
     unless name.nil?
-      @pagy, @items = pagy(MenuItem.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 10)
+      @pagy, @items = pagy(MenuItem.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 12)
     end
     render "index"
   end
@@ -34,8 +34,12 @@ class MenuItemsController < ApplicationController
     @menu_item.price = menu_item_params["price"]
     @menu_item.description = menu_item_params["description"]
     @menu_item.menu_category_id = menu_item_params[:category]
-    @menu_item.save
-    redirect_back(fallback_location: "/")
+    if @menu_item.save
+      flash[:success] = "Successfully Updated"
+    else
+      flash[:error] = @menu_item.errors.full_messages.join(", ")
+    end
+    redirect_to "/menu_items"
   end
 
   def create

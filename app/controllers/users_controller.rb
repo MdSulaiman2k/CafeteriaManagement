@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @pagy, @users = pagy(User.order(:name, :id), items: 10)
-    render "index"
+    @pagy, @users = pagy(User.where("archived_on is NULL").order(:name, :id), items: 10)
   end
 
   def show
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
         flash[:error] = @user.errors.full_messages.join(", ")
       end
     end
-    redirect_to "/users"
+    redirect_back(fallback_location: "/")
   end
 
   def search
@@ -35,12 +34,12 @@ class UsersController < ApplicationController
     search = params[:search]
     unless name.nil?
       if (search == "id")
-        @pagy, @users = pagy(User.where("id = ?", name))
+        @pagy, @users = pagy(User.where("id = ? and archived_on is NULL", name))
       else
-        @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%'").order(:name, :id), items: 10)
+        @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%' and archived_on is NULL").order(:name, :id), items: 10)
       end
     else
-      @pagy, @users = pagy(User.order(:name, :id), items: 10)
+      @pagy, @users = pagy(User.where("archived_on is NULL").order(:name, :id), items: 10)
     end
     render "index"
   end
@@ -101,21 +100,31 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if (@user.id == current_user.id)
-      if (@user.authenticate(params[:password]))
-        @user.destroy
-        session[:current_user_id] = nil
-        @current_user = nil
-        redirect_to "/"
+    orderPending = @user.orders.where("delivered_at is NULL")
+    if orderPending.empty?
+      if (@user.id == current_user.id)
+        if (@user.authenticate(params[:password]))
+          @user.archived_on = Time.zone.now
+          @user.save(validate: false)
+          session[:current_user_id] = nil
+          @current_user = nil
+          redirect_to "/"
+        else
+          flash[:error] = "Incorrect Password"
+          redirect_to "/users/#{current_user.id}"
+        end
+      elsif (current_user.roll == "admin")
+        @user.archived_on = Time.zone.now
+        unless @user.save(validate: false)
+          flash[:error] = @user.errors.full_messages.join(", ")
+        end
+        redirect_to "/users"
       else
-        flash[:error] = "Incorrect Password"
-        redirect_to "/users/#{current_user.id}"
+        redirect_to error_path
       end
-    elsif (current_user.roll == "admin")
-      @user.destroy
-      redirect_to "/users"
     else
-      redirect_to error_path
+      flash[:error] = "User Have Pending Orders"
+      redirect_back(fallback_location: "/")
     end
   end
 

@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
   create_table "menu_categories", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "status", null: false
+    t.datetime "archived_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_menu_categories_on_name", unique: true
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
     t.text "description", null: false
     t.decimal "price", null: false
     t.string "status", null: false
+    t.datetime "archived_on"
     t.bigint "menu_category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -74,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "address_id", null: false
+    t.bigint "address_id"
     t.datetime "order_at", null: false
     t.datetime "delivered_at"
     t.index ["address_id"], name: "index_orders_on_address_id"
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
     t.string "password_digest", null: false
     t.string "roll", null: false
     t.string "phonenumber", null: false
+    t.datetime "archived_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

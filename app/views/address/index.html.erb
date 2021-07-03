@@ -42,7 +42,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <%= form_with url: orders_path(address: address_id) , method: "post" do |f| %>
-          <%= f.submit "Cofirm Your Order",class: "btn btn-primary", disabled: address_id == 0? true : false %>
+          <%= f.submit "Cofirm Your Order",class: "btn btn-primary", id:"buttonConfirmOrder", disabled: address_id == 0? true : false %>
         <%end%>
       </div>
     </div>

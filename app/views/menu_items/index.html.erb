@@ -38,4 +38,25 @@
       </div>
    </div>
 </div>
-<%= javascript_pack_tag 'new' %>
+<div class="modal fade" id="confirmamount" tabindex="-1" aria-labelledby="confirmAmount" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Place Orders</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <h1 class="addressconfirm">Place Customers Order here: </h1>
+         <div class="heading">
+            Are You sure ?
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= form_with url: orders_path , method: "post" do |f| %>
+          <%= f.submit "Cofirm Orders",class: "btn btn-primary", id:"buttonConfirmOrder"%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

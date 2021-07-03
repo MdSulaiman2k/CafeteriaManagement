@@ -23,7 +23,7 @@ class MenuCategoryController < ApplicationController
     unless @menu_category.save
       flash[:error] = @menu_category.errors.full_messages.join(", ")
     end
-    redirect_to menu_category_index_path
+    redirect_back(fallback_location: "/")
   end
 
   def edit
@@ -35,7 +35,7 @@ class MenuCategoryController < ApplicationController
     menu_category = MenuCategory.find(id)
     menu_category.status = status
     menu_category.save!
-    redirect_to menu_category_index_path
+    redirect_back(fallback_location: "/")
   end
 
   def update
@@ -46,7 +46,7 @@ class MenuCategoryController < ApplicationController
 
   def destroy
     @menu_category.destroy
-    redirect_to menu_category_index_path
+    redirect_back(fallback_location: "/")
   end
 
   private

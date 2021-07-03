@@ -3,9 +3,13 @@ class OrdersController < ApplicationController
   before_action :ensure_admin_in, :only => [:search]
 
   def create
+    if (params[:address].nil? and @current_user.roll != "clerk")
+      flash[:error] = "Your order is not placed"
+      redirect_to "/address"
+    end
     @order = Order.new(address_id: params[:address], user_id: current_user.id, order_at: Time.zone.now)
     unless @order.save
-      flash[:erro] = "Your order is not placed"
+      flash[:error] = "Your order is not placed"
       redirect_to "/address"
     else
       redirect_to shift_cart_order_path(order_id: @order.id)

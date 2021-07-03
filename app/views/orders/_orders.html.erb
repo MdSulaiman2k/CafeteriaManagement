@@ -1,16 +1,22 @@
 <div class="row border-bottom border-2  p-3">
       <div class="col-lg-3 border-end  border-3 order-address">
+        <% unless orderAddress.nil? %>
         <h1 class="head"><%= orderAddress.name%></h1>
         <label class="addresscontent">
           <%= "#{orderAddress.street}\t#{orderAddress.city}\t#{orderAddress.state}\t"  %>
           <h1><%= orderAddress.postal_code%></h1>
           <h2>Phone number: <%= orderAddress.phonenumber%></h2>
         </label>
+        <%else%>
+          <h1 class="head">Walking Customer</h1>
+          <h1 class="ms-2 mt-3 fw-bold">Food Placed By</h1>
+          <h1 class="mt-2 ms-4"><%= "#{User.find(order.user_id).name.capitalize()}"%></h1>
+        <%end%>
       </div>
       <div class="col-lg-7 order-status ">
         <ul class="list-group p-3 bg-light">
           <li class="list-group-item list-group-flush card-header bg-light head">
-            <%="Order#{@current_user.id}#{order.id}"%>
+            <%="Order#{order.user_id}#{order.id}"%>
             <%= link_to "/view", order_items_path(order_id: order.id, user_id: order.user_id)%>
           </li>
           <li class="list-group-item bg-light">

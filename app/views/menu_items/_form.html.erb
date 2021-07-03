@@ -1,26 +1,27 @@
 
-        <label class="AddItemLabel">Name</label>
+        <label class="AddItemLabel">Name*</label>
         <%= form.text_field :name,
                           class: "AddItem",
                           autocomplete: "off",
                           required: true,
-                          placeholder: "Item Name"
+                          placeholder: "Item Name",
+                          autofocus: true
         %>
-        <label class="AddItemLabel">price</label>
+        <label class="AddItemLabel">price*</label>
         <%= form.number_field :price,
                           class: "AddItem",
                           autocomplete: "off",
                           required: true,
                           placeholder: "Item Price"
         %>
-        <label class="AddItemLabel">Description</label>
+        <label class="AddItemLabel">Description*</label>
         <%= form.text_area :description,
                           class: "AddDescription",
                           autocomplete: "off",
                           required: true,
                           placeholder: "Item Description"
         %>
-        <label class="AddItemLabel">Category</label>
+        <label class="AddItemLabel">Category*</label>
         <%if menu_item%>
           <%= form.select(:category,
             options_for_select(menu_categories.collect{ |category| [category.name, category.id] } , menu_item.menu_category_id),

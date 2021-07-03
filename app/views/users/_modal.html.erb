@@ -3,7 +3,7 @@
            "UserName"  => { :topic =>  "Change Your Name", :change => "name" },
            "Email"  => { :topic =>  "Change Your Email", :change => "email" },
            "Phonenumber"  => { :topic =>  "Change Your PhoneNumber", :change => "phonenumber" },
-           "Password"  => { :topic => "Change Your Password", :change => "newpassword"}
+           "Password"  => { :topic => "Change Your Password", :change => "New password"}
         }
       %>
       <div class="modal-header">
@@ -28,7 +28,7 @@
                                 id: "recipient-name",
                                 autocomplete: "off",
                                 require: true,
-                                placeholder: "New #{editUser[input][:change]}"
+                                placeholder: "#{editUser[input][:change]}"
               %>
             <%end%>
           </div>

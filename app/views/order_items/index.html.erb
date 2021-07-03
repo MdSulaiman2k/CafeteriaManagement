@@ -9,6 +9,7 @@
       <h1 class="head">#Order<%="#{@current_user.id}#{@orderitems.first.id}"%></h1>
       <div class="row justify-content-center">
         <div class="col-lg-5">
+          <% unless @address.nil?%>
           <h1 class="bg-dark text-white p-2">Address: </h1>
           <h1 class="head ps-3 pt-3"><%= @address.name %></h1>
           <label class="addresscontent p-3 ps-5 ">
@@ -16,6 +17,9 @@
             <h1><%= @address.postal_code%></h1>
             <h2>Phone number: <%= @address.phonenumber%></h2>
           </label>
+          <%else%>
+            <h1 class="bg-dark text-white p-2">Walking Customer</h1>
+          <%end%>
            <div class="p-3 border-bottom border-3">
               <h2 >Time: <%= @order.order_at%></h1>
             </div>

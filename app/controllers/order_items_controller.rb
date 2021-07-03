@@ -24,6 +24,9 @@ class OrderItemsController < ApplicationController
 
   def get_order_address
     @order = Order.find(params[:order_id])
-    @address = @current_user.addresses.find(@order.address_id)
+    @user = User.find(@order.user_id)
+    unless @order.address_id.nil?
+      @address = @user.addresses.find(@order.address_id)
+    end
   end
 end

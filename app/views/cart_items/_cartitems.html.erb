@@ -1,4 +1,9 @@
 <%unless(@cartitems.empty?)%>
+<%if @current_user.roll == "clerk"%>
+    <button class="btn btn-primary float-end mb-3 me-5" data-bs-toggle="modal" data-bs-target="#confirmamount" data-bs-whatever="confirm Order">
+    Customer Order
+    </button>
+  <%end%>
 <h1 class="carthead" >Cart</h1>
 <div id="cartitems" >
   <div id="itemsamount">
@@ -20,6 +25,7 @@
   <%= link_to address_index_path, id: "subtn" do %>
         Checkout
   <%end%>
+
 </div>
 <%else%>
   <h1 class="carthead" >Empty Cart</h1>
