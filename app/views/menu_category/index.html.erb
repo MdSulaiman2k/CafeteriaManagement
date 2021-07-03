@@ -43,7 +43,7 @@
                         <td><%= category.id %></td>
                       <%end%>
                       <td>
-                        <%= link_to category.name, menu_items_path(item_id: category.id), class: "link-tag" %>
+                        <%= link_to category.name, menu_items_path(item_id: category.id ,category_name: category.name ), class: "link-tag" %>
                       </td>
                       <td>
                         <%if @current_user.roll == "admin"%>

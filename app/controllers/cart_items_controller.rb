@@ -15,13 +15,13 @@ class CartItemsController < ApplicationController
     unless @cart_item.save
       flash[:error] = @cart_item.errors.full_messages.join(", ")
     end
-    redirect_to menu_items_path
+    redirect_back(fallback_location: "/")
   end
 
   def updatequantity
     value = params[:value].to_i
     if (value == 0)
-      redirect_to menu_items_path
+      redirect_back(fallback_location: "/")
     else
       cart_item = CartItem.where("menu_item_id = ? and user_id= ?", params[:item_id], current_user.id).first
       value -= 1
@@ -35,7 +35,7 @@ class CartItemsController < ApplicationController
           end
         end
       end
-      redirect_to menu_items_path
+      redirect_back(fallback_location: "/")
     end
   end
 end

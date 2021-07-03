@@ -1,4 +1,6 @@
 class OrderItemsController < ApplicationController
+  before_action :get_order_address, only: %i[index]
+
   def shift_cart_to_order
     checkerror = false
     CartItem.all.each do |cart|
@@ -17,6 +19,11 @@ class OrderItemsController < ApplicationController
   end
 
   def index
-    @pagy, @orderitems = pagy(User.find(params[:user_id]).orders.find(params[:order_id]).order_items.order(:id))
+    @pagy, @orderitems = pagy(User.find(params[:user_id]).orders.find(params[:order_id]).order_items.order(:id), items: 20)
+  end
+
+  def get_order_address
+    @order = Order.find(params[:order_id])
+    @address = @current_user.addresses.find(@order.address_id)
   end
 end

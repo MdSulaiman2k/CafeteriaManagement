@@ -5,6 +5,7 @@ class MenuItemsController < ApplicationController
 
   def index
     item = params[:item_id]
+    @categorie_name = params[:category_name]
     unless (item.nil?)
       @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 10)
     else
@@ -34,7 +35,7 @@ class MenuItemsController < ApplicationController
     @menu_item.description = menu_item_params["description"]
     @menu_item.menu_category_id = menu_item_params[:category]
     @menu_item.save
-    redirect_to menu_items_path
+    redirect_back(fallback_location: "/")
   end
 
   def create
@@ -55,12 +56,12 @@ class MenuItemsController < ApplicationController
     menu_item = MenuItem.find(id)
     menu_item.status = status
     menu_item.save!
-    redirect_to menu_items_path
+    redirect_back(fallback_location: "/")
   end
 
   def destroy
     @menu_item.destroy
-    redirect_to menu_items_path
+    redirect_back(fallback_location: "/")
   end
 
   private
@@ -72,5 +73,4 @@ class MenuItemsController < ApplicationController
   def menu_item_params
     params.require(:menu_item).permit(:name, :price, :description, :category)
   end
-
 end

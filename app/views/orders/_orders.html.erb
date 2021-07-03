@@ -7,7 +7,7 @@
           <h2>Phone number: <%= orderAddress.phonenumber%></h2>
         </label>
       </div>
-      <div class="<%=  @current_user.roll == "admin" || @current_user.roll == "clerk"? "col-lg-7" : "col-lg-8" %> order-status ">
+      <div class="col-lg-7 order-status ">
         <ul class="list-group p-3 bg-light">
           <li class="list-group-item list-group-flush card-header bg-light head">
             <%="Order#{@current_user.id}#{order.id}"%>
@@ -21,9 +21,15 @@
       </div>
       <% if (@current_user.roll == "admin" or @current_user.roll == "clerk") and order.delivered_at.nil? %>
       <div class="col-lg-2 statusupdate">
-      <%= form_with(url: update_pending_status_path(id: order.id), method: "patch") do |form|%>
-        <%= form.submit "Update Status" , class: "btn btn-primary" %>
-      <%end%>
+        <%= form_with(url: update_pending_status_path(id: order.id), method: "patch") do |form|%>
+          <%= form.submit "Update Status" , class: "btn btn-primary" %>
+        <%end%>
       </div>
+      <%else%>
+        <div class="col-lg-2 statusupdate">
+          <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : "btn-success" %>">
+            <%=order.delivered_at.nil? ? "Pending" : "Delivered" %>
+          </div>
+        </div>
       <%end%>
 </div>

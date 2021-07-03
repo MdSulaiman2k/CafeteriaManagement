@@ -4,6 +4,7 @@ class AddressController < ApplicationController
 
   def index
     @addresses = Address.where("user_id = ? and archived_on is Null", current_user.id).order(:defaultaddress => :desc, :name => :asc)
+    @url_path = params[:action_url]
   end
 
   def new
@@ -26,7 +27,7 @@ class AddressController < ApplicationController
         flash[:error] = @address.error.full_messages.join(", ")
       end
     end
-    redirect_to "/address"
+    redirect_back(fallback_location: "/")
   end
 
   def update
@@ -38,10 +39,8 @@ class AddressController < ApplicationController
     @address.postal_code = address_params[:postal_code]
     unless @address.save
       flash[:error] = @address.error.full_messages.join(", ")
-      redirect_to "/address"
-    else
-      redirect_to "/address"
     end
+    redirect_back(fallback_location: "/")
   end
 
   def create
@@ -75,7 +74,7 @@ class AddressController < ApplicationController
         flash[:error] = "Something went wrong"
       end
     end
-    redirect_to "/address"
+    redirect_back(fallback_location: "/")
   end
 
   private
