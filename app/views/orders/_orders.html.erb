@@ -17,7 +17,7 @@
         <ul class="list-group p-3 bg-light">
           <li class="list-group-item list-group-flush card-header bg-light head">
             <%="Order#{order.user_id}#{order.id}"%>
-            <%= link_to "/view", order_items_path(order_id: order.id, user_id: order.user_id)%>
+            <%= link_to "/#{User.find(order.user_id).name}", order_items_path(order_id: order.id, user_id: order.user_id)%>
           </li>
           <li class="list-group-item bg-light">
           <h1 class="head-question">Status: </h1><%= order.delivered_at.nil? ?  "Pending" : "Delivered  #{order.delivered_at}" %>
