@@ -7,26 +7,26 @@ class MenuItemsController < ApplicationController
     item = params[:item_id]
     @categorie_name = params[:category_name]
     unless (item.nil?)
-      @pagy, @items = pagy(MenuItem.where(menu_category_id: item).order(:status, :id), items: 12)
+      @pagy, @items = pagy(MenuItem.where("menu_category_id = ? and archived_on is NULL", item).order(:status, :id), items: 12)
     else
-      @pagy, @items = pagy(MenuItem.all.order(:status, :id), items: 12)
+      @pagy, @items = pagy(MenuItem.where("archived_on is NULL").order(:status, :id), items: 12)
     end
   end
 
   def search
     name = params[:name]
     unless name.nil?
-      @pagy, @items = pagy(MenuItem.where("lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 12)
+      @pagy, @items = pagy(MenuItem.where("archived_on is NULL and lower(name)  Like '" + "#{name.downcase}%'").order(:id), items: 12)
     end
     render "index"
   end
 
   def add
-    @menu_categories = MenuCategory.all
+    @menu_categories = MenuCategory.where("archived_on is NULL")
   end
 
   def edit
-    @menu_categories = MenuCategory.all
+    @menu_categories = MenuCategory.where("archived_on is NULL")
   end
 
   def update
@@ -64,7 +64,10 @@ class MenuItemsController < ApplicationController
   end
 
   def destroy
-    @menu_item.destroy
+    @menu_item.archived_on = Time.zone.now
+    unless @menu_item.save
+      flash[:error] = @menu_item.errors.full_messages.join(", ")
+    end
     redirect_back(fallback_location: "/")
   end
 

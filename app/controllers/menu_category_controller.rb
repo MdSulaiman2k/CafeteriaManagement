@@ -4,15 +4,15 @@ class MenuCategoryController < ApplicationController
   before_action :set_cart_items, only: %i[index search]
 
   def index
-    @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 10)
+    @pagy, @categories = pagy(MenuCategory.where("archived_on is NULL").order(:status => :desc, :id => :asc), items: 10)
   end
 
   def search
     name = params[:name]
     unless name.nil?
-      @pagy, @categories = pagy(MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%'").order(:status => :desc, :id => :asc), items: 10)
+      @pagy, @categories = pagy(MenuCategory.where("lower(name)  Like '" + "#{name.downcase}%' and archived_on is NULL").order(:status => :desc, :id => :asc), items: 10)
     else
-      @pagy, @categories = pagy(MenuCategory.all.order(:status => :desc, :id => :asc), items: 10)
+      @pagy, @categories = pagy(MenuCategory.where("archived_on is NULL").order(:status => :desc, :id => :asc), items: 10)
     end
     render "index"
   end
@@ -45,7 +45,15 @@ class MenuCategoryController < ApplicationController
   end
 
   def destroy
-    @menu_category.destroy
+    menuItemcount = MenuItem.where("menu_category_id = ?  and archived_on is NULL", params[:id]).count
+    if menuItemcount == 0
+      @menu_category.archived_on = Time.zone.now
+      unless @menu_category.save
+        flash[error] = @menu_category.errors.full_messages.join(", ")
+      end
+    else
+      flash[:error] = "Not allowed first delete all the menu Items"
+    end
     redirect_back(fallback_location: "/")
   end
 
