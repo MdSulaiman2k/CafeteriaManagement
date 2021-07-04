@@ -1,22 +1,26 @@
 <div class="All-content">
   <h1 class="heading">Menu Category</h1>
-  <div class="Menu-category row">
-    <%if @current_user.roll == "admin"%>
-       <%= render partial: "layouts/searchbox", locals:
-        {
-          url_path: "/menu_category",
-          place: "Add",
-          method: "post",
-        }
-      %>
-    <%end%>
-    <%= render partial: "layouts/searchbox", locals:
-        {
-          url_path: search_menu_category_path,
-          place: "Search",
-          method: "get",
-        }
-    %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 bg-light">
+        <%= render partial: "layouts/searchbox", locals:
+          {
+            url_path: search_menu_category_path,
+            place: "Search",
+            method: "get",
+          }
+        %>
+      </div>
+      <div class="col-lg-4 float-end">
+            <%if @current_user.roll == "admin"%>
+               <abbr title="Add Menu Category">
+                  <button class="btn new-btn" data-bs-toggle="modal" data-bs-target="#addCategory" data-bs-whatever="Add Category">
+                    <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>New
+                  </button>
+               </abbr>
+            <%end%>
+      </div>
+    </div>
   </div>
   <div class="container  mt-3">
     <div class="row">
@@ -86,6 +90,39 @@
           <%= render :partial => "cart_items/cartitems"%>
         </div>
       <%end%>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategory" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%if @current_user.roll == "admin"%>
+         <h1 class="head">Add Category</h1>
+         <div class="Search-container col-3 mt-3">
+         <%= form_with(url: "/menu_category" , method: "post") do |form|%>
+            <%= form.text_field :name,
+                                class: "SearchItem",
+                                autocomplete: "off",
+                                placeholder: "add",
+                                required: true,
+                                autofocus: true
+            %>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <%= form.submit "Add",
+                class: "btn btn-outline-dark Search Item-button"
+            %>
+         <%end%>
+         <%end%>
+      </div>
     </div>
   </div>
 </div>
