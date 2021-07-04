@@ -1,0 +1,37 @@
+<div class="All-content">
+  <h1 class="heading">Menu Item Recycle Bin</h1>
+  <div class="container">
+      <div class="row">
+         <div class="col-lg-8 bg-light">
+            <%= render partial: "layouts/searchbox", locals:
+               { url_path: search_recycle_menu_item_path,
+                 place: "Search",
+                 method: "get"
+               }
+            %>
+         </div>
+      </div>
+  </div>
+  <div class="container">
+  <table class="table table-striped mt-5 ">
+    <thead>
+      <tr class="bg-dark text-white">
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Restore</th>
+        <th scope="col">Permanent Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%unless @menuItems.nil?
+      @menuItems.each do |item|
+    %>
+        <%= render partial: "recyclebin" , locals: {
+          item: item
+        }%>
+      <%end%>
+    <%end%>
+    </tbody>
+  </table>
+  </div>
+</div>

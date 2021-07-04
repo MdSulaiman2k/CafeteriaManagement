@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get "/order_items/shiftcart" => "order_items#shift_cart_to_order", as: :shift_cart_order
   patch "/updatestatus" => "orders#update_pending_status", as: :update_pending_status
   get "/search" => "orders#search", as: :search_orders
+  get "/menu_items/recycle" => "recycle#menu_items_recycle"
+  get "/restore" => "recycle#restore_menu_items", as: :restore_menu_item
+  get "/menu_items/recycle/search" => "recycle#search", as: :search_recycle_menu_item
+  delete "/deletepermanent" => "recycle#delete_menu_item", as: :delete_menu_item
   resources :users
   resources :menu_category
   resources :menu_items

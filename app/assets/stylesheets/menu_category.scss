@@ -27,9 +27,9 @@
 .Edit-category-image {
   width: 20px;
   height: 20px;
-  margin-left: 1rem;
   cursor: pointer;
-  margin-right: 2rem;
+
+
 }
 
 .user-image {
@@ -45,7 +45,6 @@
   cursor: pointer;
   visibility: hidden;
   display: inline-block;
-  margin-top: 1rem;
 }
 
 .Delete-category {
@@ -104,7 +103,7 @@
   color: blue;
 }
 
-.Categories:hover .Delete-category-image {
+.hoverdelete:hover .Delete-category-image {
   visibility: visible;
 }
 
