@@ -17,9 +17,13 @@ Rails.application.routes.draw do
   patch "/updatestatus" => "orders#update_pending_status", as: :update_pending_status
   get "/search" => "orders#search", as: :search_orders
   get "/menu_items/recycle" => "recycle#menu_items_recycle"
-  get "/restore" => "recycle#restore_menu_items", as: :restore_menu_item
+  get "/restoremenuitem/:id" => "recycle#restore_menu_items", as: :restore_menu_item
   get "/menu_items/recycle/search" => "recycle#search", as: :search_recycle_menu_item
-  delete "/deletepermanent" => "recycle#delete_menu_item", as: :delete_menu_item
+  delete "/deletemenuitem/:id" => "recycle#delete_menu_item", as: :delete_menu_item
+  get "/menu_category/recycle" => "recycle#menu_category_recycle"
+  get "/restoremenucategory/:id" => "recycle#restore_menu_category", as: :restore_menu_category
+  get "/menu_category/recycle/search" => "recycle#search_menucategory", as: :search_recycle_menu_categories
+  delete "/deletemenucategory/:id" => "recycle#delete_menu_category", as: :delete_menu_category
   resources :users
   resources :menu_category
   resources :menu_items

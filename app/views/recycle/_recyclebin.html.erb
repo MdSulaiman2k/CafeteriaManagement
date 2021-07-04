@@ -3,8 +3,8 @@
       <td><%=item.id%></th>
       <td><%=item.name%></td>
       <td><%= link_to image_tag("backward-time.png", border: 0,class: 'Edit-category-image'),
-                              restore_menu_item_path(id: item.id)
+                              restoreurl +"#{item.id}"
                           %></td>
       <td><%=link_to image_tag("delete.png", border: 0,class: 'Edit-category-image'),
-                              delete_menu_item_path(id: item.id),method: "delete",data: {confirm: "Are you sure?"}%></td>
+                              deleteurl+"#{item.id}",method: "delete",data: {confirm: "Are you sure?"}%></td>
 </tr>

@@ -5,10 +5,11 @@
     "Menu Categories" => { :image => "category" , :path => "/menu_category", :abbr => "Menu Categories"},
     "Menu Items"      => { :image => "fooditem"  , :path => "/menu_items", :abbr =>  "Menu Items"},
     "Users"           => { :image => "group" , :path => "/users", :abbr => "Users" },
-    "User"            => {:image => "user" ,:path => "/users/#{@current_user.id}" , :abbr => "My Account"},
-    "MenuItem recyclebin" => {:image => "delete-folder" , :path => "/menu_items/recycle" , :abbr => "Menu Item recyclebin"}
+    "MenuItem recyclebin" => {:image => "delete-file" , :path => "/menu_items/recycle" , :abbr => "Menu Item recyclebin"},
+    "MenuCategory recyclebin" => {:image => "delete-folder" , :path => "/menu_category/recycle" , :abbr => "Menu Category recyclebin"},
+    "User"            => {:image => "user" ,:path => "/users/#{@current_user.id}" , :abbr => "My Account"}
   }
-  admin_rights  = ["/menu_items/addItem" , "/users" , "/menu_items/recycle"]
+  admin_rights  = ["/menu_items/addItem" , "/users" , "/menu_items/recycle" , "/menu_category/recycle"]
   home_items.each do |key , value|
      check_admin_rights = admin_rights.include? home_items[key][:path]
 %>

@@ -1,10 +1,10 @@
 <div class="All-content">
-  <h1 class="heading">Menu Item Recycle Bin</h1>
+  <h1 class="heading">Menu Categories Recycle Bin</h1>
   <div class="container">
       <div class="row">
          <div class="col-lg-8 bg-light">
             <%= render partial: "layouts/searchbox", locals:
-               { url_path: search_recycle_menu_item_path,
+               { url_path: search_recycle_menu_categories_path,
                  place: "Search",
                  method: "get"
                }
@@ -23,13 +23,13 @@
       </tr>
     </thead>
     <tbody>
-    <%unless @menuItems.nil?
-      @menuItems.each do |item|
+    <%unless @menucategories.nil?
+      @menucategories.each do |item|
     %>
         <%= render partial: "recyclebin" , locals: {
           item: item,
-          restoreurl: "/restoremenuitem/",
-          deleteurl: "/deletemenuitem/"
+          restoreurl: "/restoremenucategory/",
+          deleteurl: "/deletemenucategory/"
         }%>
       <%end%>
     <%end%>
