@@ -17,9 +17,9 @@ class OrdersController < ApplicationController
   end
 
   def search
-    user = User.find_by(id: params[:id])
-    unless (user.nil?)
-      @pagy, @orders = pagy(user.orders.order("delivered_at DESC NULLS FIRST"))
+    order_at = Order.find_by(id: params[:id])
+    unless (order_at.nil?)
+      @orders = [order_at]
     end
     render "index"
   end

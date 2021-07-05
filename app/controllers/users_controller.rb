@@ -100,6 +100,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    if @user.id == 1
+      flash[:error] = "You not able to delete the super admin"
+      redirect_back(fallback_location: "/") and return
+    end
     orderPending = @user.orders.where("delivered_at is NULL")
     if orderPending.empty?
       if (@user.id == current_user.id)

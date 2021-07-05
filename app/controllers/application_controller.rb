@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
     current_user_id = session[:current_user_id]
     if current_user_id
-      @current_user = User.find(current_user_id)
+      @current_user = User.where("id = ? and archived_on is NULL", current_user_id).first
     else
       nil
     end
