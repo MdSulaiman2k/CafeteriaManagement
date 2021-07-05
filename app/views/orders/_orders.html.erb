@@ -20,7 +20,7 @@
             <%= link_to "/#{User.find(order.user_id).name}", order_items_path(order_id: order.id, user_id: order.user_id)%>
           </li>
           <li class="list-group-item bg-light">
-          <h1 class="head-question">Status: </h1><%= order.delivered_at.nil? ?  "Pending" : "Delivered  #{order.delivered_at}" %>
+          <h1 class="head-question">Status: </h1><%= order.delivered_at.nil? ?  "Pending" : (order.status == "delivered")? "Delivered  #{order.delivered_at.in_time_zone("Chennai")}" : "Canceled Order" %>
           </li>
           <li class="list-group-item bg-light"><h1 class="head-question">Total: </h1><%= totalAmount%></li>
         </ul>
@@ -31,10 +31,15 @@
           <%= form.submit "Update Status" , class: "btn btn-primary" %>
         <%end%>
       </div>
+      <div class="col-lg-2 statusupdate">
+        <%= form_with(url: order_path(id: order.id), method: "delete") do |form|%>
+          <%= form.submit "Cancel Order" , class: "btn btn-danger" %>
+        <%end%>
+      </div>
       <%else%>
         <div class="col-lg-2 statusupdate">
-          <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : "btn-success" %>">
-            <%=order.delivered_at.nil? ? "Pending" : "Delivered" %>
+          <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : (order.status == "delivered") ? "btn-success" : "btn-danger" %>">
+            <%= order.status.capitalize()%>
           </div>
         </div>
       <%end%>

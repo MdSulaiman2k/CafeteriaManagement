@@ -21,7 +21,7 @@
             <h1 class="bg-dark text-white p-2">Walking Customer</h1>
           <%end%>
            <div class="p-3 border-bottom border-3">
-              <h2 >Time: <%= @order.order_at%></h1>
+              <h2 >Time: <%= @order.order_at.in_time_zone("Chennai")%></h1>
             </div>
           <table class="table mt-4 mb-4 border-bottom border-3">
              <thead class="bg-dark text-light">

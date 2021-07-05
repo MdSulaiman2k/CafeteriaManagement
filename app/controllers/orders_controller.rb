@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
   before_action :get_order_address, only: %i[create index]
-  before_action :ensure_admin_in, :only => [:search]
+  before_action :ensure_admin_in, :only => [:search, :update_pending_status]
 
   def create
     if (params[:address].nil? and @current_user.roll != "clerk")
       flash[:error] = "Your order is not placed"
       redirect_to "/address"
     end
-    @order = Order.new(address_id: params[:address], user_id: current_user.id, order_at: Time.zone.now)
+    @order = Order.new(address_id: params[:address], user_id: current_user.id, order_at: Time.zone.now, status: "pending")
     unless @order.save
       flash[:error] = "Your order is not placed"
       redirect_to "/address"
@@ -28,6 +28,7 @@ class OrdersController < ApplicationController
     if (@current_user.roll == "admin" || @current_user.roll == "clerk")
       order = Order.find(params[:id])
       order.delivered_at = Time.zone.now
+      order.status = "delivered"
       unless order.save
         flash[:error] = order.errors.full_messages.joins(", ")
       end
@@ -35,6 +36,22 @@ class OrdersController < ApplicationController
     else
       redirect_to error_path
     end
+  end
+
+  def destroy
+    order = Order.find(params[:id])
+    if (order.status == "pending")
+      order.delivered_at = Time.zone.now
+      order.status = "cancel"
+      unless order.save
+        flash[:error] = order.errors.full_messages.joins(", ")
+      else
+        flash[:success] = "Order was cancel"
+      end
+    else
+      flash[:error] = "You are not able to cancel you are order"
+    end
+    redirect_back(fallback_location: "/")
   end
 
   def index

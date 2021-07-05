@@ -56,7 +56,7 @@
         <label class="FormInput-label">
           Roll*
         </label>
-        <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] , ["user" , "user"]] , "user"),
+        <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] ] , "clerk"),
               {}, { :class => 'btn-outline-dark selection-input'}  )
         %>
       </div>

@@ -23,7 +23,7 @@ class MenuCategoryController < ApplicationController
     unless @menu_category.save
       flash[:error] = @menu_category.errors.full_messages.join(", ")
     end
-    redirect_back(fallback_location: "/")
+    redirect_to "/menu_category"
   end
 
   def edit

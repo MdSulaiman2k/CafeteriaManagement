@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "address_id"
+    t.string "status", null: false
     t.datetime "order_at", null: false
     t.datetime "delivered_at"
     t.index ["address_id"], name: "index_orders_on_address_id"
