@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   delete "/deletemenucategory/:id" => "recycle#delete_menu_category", as: :delete_menu_category
   get "orders/invoice" => "invoice#index", as: :order_invoice
   get "orders/status" => "orders#search_status", as: :search_order_status
+  get "orders/timeduration" => "orders#search_time_duration", as: :search_time_duration
   resources :users
   resources :menu_category
   resources :menu_items

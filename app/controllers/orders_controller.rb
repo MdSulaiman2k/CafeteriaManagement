@@ -20,13 +20,10 @@ class OrdersController < ApplicationController
     @search = params[:search]
     begin
       value = Integer(params[:id])
-      order_at = Order.where("#{@search} = ?", value).order("delivered_at DESC NULLS FIRST", id: :desc)
+      @pagy, @orders = pagy(Order.where("#{@search} = ?", value).order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     rescue
       @orders = nil
       flash[:error] = "Enter valid input"
-    end
-    unless (order_at.nil?)
-      @orders = order_at
     end
     render "index"
   end
@@ -34,10 +31,17 @@ class OrdersController < ApplicationController
   def search_status
     @status_order = params[:status]
     if (@status_order == "walkin")
-      @orders = Order.where("address_id is NULL").order("delivered_at DESC NULLS FIRST", id: :desc)
+      @pagy, @orders = pagy(Order.where("address_id is NULL").order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     else
-      @orders = Order.where("status = ?", @status_order).order("delivered_at DESC NULLS FIRST", id: :desc)
+      @pagy, @orders = pagy(Order.where("status = ?", @status_order).order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     end
+    render "index"
+  end
+
+  def search_time_duration
+    to = params[:to]
+    @pagy, @orders = pagy(Order.where("order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
+      order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     render "index"
   end
 
@@ -46,6 +50,7 @@ class OrdersController < ApplicationController
       order = Order.find(params[:id])
       order.delivered_at = Time.zone.now
       order.status = "delivered"
+      order.comment = params[:reason]
       unless order.save
         flash[:error] = order.errors.full_messages.joins(", ")
       end
@@ -60,6 +65,7 @@ class OrdersController < ApplicationController
     if (order.status == "pending")
       order.delivered_at = Time.zone.now
       order.status = "cancel"
+      order.comment = params[:reason]
       unless order.save
         flash[:error] = order.errors.full_messages.joins(", ")
       else
@@ -73,11 +79,11 @@ class OrdersController < ApplicationController
 
   def index
     if @current_user.roll == "admin"
-      @pagy, @orders = pagy(Order.order("delivered_at DESC NULLS FIRST", id: :desc))
+      @pagy, @orders = pagy(Order.order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     elsif @current_user.roll == "clerk"
-      @pagy, @orders = pagy(Order.where("order_at >=? and order_at<=?", DateTime.now().beginning_of_month - 1.months, DateTime.now()).order("delivered_at DESC NULLS FIRST", id: :desc))
+      @pagy, @orders = pagy(Order.where("order_at >=? and order_at<=?", DateTime.now().beginning_of_month - 1.months, DateTime.now()).order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     else
-      @pagy, @orders = pagy(@current_user.orders.order("delivered_at DESC NULLS FIRST", id: :desc))
+      @pagy, @orders = pagy(@current_user.orders.order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     end
   end
 

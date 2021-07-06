@@ -16,16 +16,16 @@
   </div>
 
   <div class="modal fade" id="confirmamount" tabindex="-1" aria-labelledby="confirmAmount" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Place Your Order</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-         <h1 class="addressconfirm">Place Your Order here: </h1>
-           <% address_id  = 0 %>
-           <% @addresses.each do |address|%>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Place Your Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="addressconfirm">Place Your Order here: </h1>
+          <% address_id  = 0 %>
+          <% @addresses.each do |address|%>
             <% if address.defaultaddress %>
               <% address_id = address.id%>
               <div class="addressheading">
@@ -37,15 +37,15 @@
                 <h2>Phone number: <%= address.phonenumber%></h2>
               </label>
             <%end%>
-           <%end%>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= form_with url: orders_path(address: address_id) , method: "post" do |f| %>
-          <%= f.submit "Cofirm Your Order",class: "btn btn-primary", id:"buttonConfirmOrder", disabled: address_id == 0? true : false %>
-        <%end%>
+          <%end%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form_with url: orders_path(address: address_id) , method: "post" do |f| %>
+            <%= f.submit "Cofirm Your Order",class: "btn btn-primary", id:"buttonConfirmOrder", disabled: address_id == 0? true : false %>
+          <%end%>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

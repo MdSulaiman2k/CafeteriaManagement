@@ -1,48 +1,49 @@
 <div class="row border-bottom border-2  p-3">
-      <div class="col-lg-3 border-end  border-3 order-address">
-        <% unless orderAddress.nil? %>
-        <h1 class="head"><%= orderAddress.name%></h1>
-        <label class="addresscontent">
-          <%= "#{orderAddress.street}\t#{orderAddress.city}\t#{orderAddress.state}\t"  %>
-          <h1><%= orderAddress.postal_code%></h1>
-          <h2>Phone number: <%= orderAddress.phonenumber%></h2>
-        </label>
-        <%else%>
-          <h1 class="head">Walk-in-Customer</h1>
-          <h1 class="ms-2 mt-3 fw-bold">Food Placed By</h1>
-          <h1 class="mt-2 ms-4"><%= "#{User.find(order.user_id).name.capitalize()}"%></h1>
-        <%end%>
+  <div class="col-lg-3 border-end  border-3 order-address">
+    <% unless orderAddress.nil? %>
+      <h1 class="head"><%= orderAddress.name%></h1>
+      <label class="addresscontent">
+        <%= "#{orderAddress.street}\t#{orderAddress.city}\t#{orderAddress.state}\t"  %>
+        <h1><%= orderAddress.postal_code%></h1>
+        <h2>Phone number: <%= orderAddress.phonenumber%></h2>
+      </label>
+    <%else%>
+      <h1 class="head">Walk-in-Customer</h1>
+      <h1 class="ms-2 mt-3 fw-bold">Food Placed By</h1>
+      <h1 class="mt-2 ms-4"><%= "#{User.find(order.user_id).name.capitalize()}"%></h1>
+    <%end%>
+  </div>
+  <div class="col-lg-7 order-status ">
+    <ul class="list-group p-3 bg-light">
+      <li class="list-group-item list-group-flush card-header bg-light head">
+        <%="Order#{order.user_id}#{order.id}"%>
+        <%= link_to "/#{User.find(order.user_id).name}", order_items_path(order_id: order.id, user_id: order.user_id)%>
+      </li>
+      <li class="list-group-item bg-light">
+        <h1 class="head-question">Status: </h1><%= order.delivered_at.nil? ?  "Pending" : (order.status == "delivered")? "Delivered  #{order.delivered_at.in_time_zone("Chennai")}" : "Canceled Order #{order.delivered_at}" %>
+      </li>
+      <li class="list-group-item bg-light"><h1 class="head-question">Total: </h1><%= totalAmount%></li>
+      <li class="list-group-item bg-light"><h1 class="head-question">Comment:</h1> <%= order.comment %></li>
+    </ul>
+  </div>
+  <% if (@current_user.roll == "admin" or @current_user.roll == "clerk") and order.delivered_at.nil? %>
+  <div class="col-lg-2 statusupdate">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderdelivered<%=order.id%>" data-bs-whatever="orderdelivered">
+      Update Status
+    </button>
+  </div>
+  <%else%>
+    <div class="col-lg-2 statusupdate">
+      <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : (order.status == "delivered") ? "btn-success" : "btn-danger" %>">
+        <%= order.status.capitalize()%>
       </div>
-      <div class="col-lg-7 order-status ">
-        <ul class="list-group p-3 bg-light">
-          <li class="list-group-item list-group-flush card-header bg-light head">
-            <%="Order#{order.user_id}#{order.id}"%>
-            <%= link_to "/#{User.find(order.user_id).name}", order_items_path(order_id: order.id, user_id: order.user_id)%>
-          </li>
-          <li class="list-group-item bg-light">
-          <h1 class="head-question">Status: </h1><%= order.delivered_at.nil? ?  "Pending" : (order.status == "delivered")? "Delivered  #{order.delivered_at.in_time_zone("Chennai")}" : "Canceled Order" %>
-          </li>
-          <li class="list-group-item bg-light"><h1 class="head-question">Total: </h1><%= totalAmount%></li>
-        </ul>
-      </div>
-      <% if (@current_user.roll == "admin" or @current_user.roll == "clerk") and order.delivered_at.nil? %>
-      <div class="col-lg-2 statusupdate">
-        <%= form_with(url: update_pending_status_path(id: order.id), method: "patch") do |form|%>
-          <%= form.submit "Update Status" , class: "btn btn-primary" %>
-        <%end%>
-      </div>
-      <%else%>
-        <div class="col-lg-2 statusupdate">
-          <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : (order.status == "delivered") ? "btn-success" : "btn-danger" %>">
-            <%= order.status.capitalize()%>
-          </div>
-        </div>
-      <%end%>
-      <%if order.delivered_at.nil?  and @current_user.roll != "user"%>
-      <div class="col-lg-2 statusupdate">
-        <%= form_with(url: order_path(id: order.id), method: "delete") do |form|%>
-          <%= form.submit "Cancel Order" , class: "btn btn-danger" %>
-        <%end%>
-      </div>
-      <%end%>
+    </div>
+  <%end%>
+  <%if order.delivered_at.nil?  and @current_user.roll != "user"%>
+  <div class="col-lg-2 statusupdate">
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ordercancel<%=order.id%>" data-bs-whatever="ordercancel">
+      Cancel Order
+    </button>
+  </div>
+  <%end%>
 </div>

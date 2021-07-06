@@ -1,51 +1,70 @@
 <div class="All-content">
   <h1 class="heading"><%="Your " unless  @current_user.roll == "admin" %>Orders</h1>
   <%if @current_user.roll == "admin"%>
-  <div class="container">
-    <div class="row">
-         <div class="col-lg-5 bg-light">
-            <%= form_with(url: search_orders_path , method: "get") do |form|%>
-            <%= form.text_field :id,
-                                class: "SearchItem",
-                                autocomplete: "off",
-                                placeholder: "Enter id",
-                                required: true
-            %>
-            <%= form.submit "Search",
-                class: "btn btn-outline-dark Search Item-button"
-            %>
-             <label class="categoryheading">Search Order</label>
-                <%= form.select(:search, options_for_select([["order_id" , "id"],["user_id" , "user_id"]] , @search),
-                      {}, { :class => 'btn-outline-dark selection-user'}  )
-                %>
-                <%end%>
-            </label>
-         </div>
-         <div class="col-lg-5">
+  <div class="container ">
+    <div class="row border-bottom border-2  pb-5">
+      <div class="col-lg-6 bg-light">
+        <%= form_with(url: search_orders_path , method: "get") do |form|%>
+          <%= form.text_field :id,
+              class: "SearchItem",
+              autocomplete: "off",
+              placeholder: "Search using Id",
+              required: true
+          %>
+          <%= form.submit "Search",
+            class: "btn btn-outline-dark Search Item-button"
+          %>
+          <%= form.select(:search, options_for_select([["order_id" , "id"],["user_id" , "user_id"]] , @search),
+            {}, { :class => 'btn-outline-dark selection-user'}  )
+          %>
+        <%end%>
+        <label>
           <%=form_with(url: search_order_status_path   , method: "get") do |form| %>
-            <label class="categoryheading">Show Order</label>
-                <%= form.select(:status, options_for_select([["Pending" , "pending"],["Delivered" , "delivered"], ["Cancel" , "cancel"], ["walk-in-customer", "walkin"]] , @status_order),
-                      {}, { :class => 'btn-outline-dark selection-user', onchange: 'this.form.submit();' }  )
-                %>
-            </label>
+            <label class="categoryheading mt-5">Show Order</label>
+            <%= form.select(:status, options_for_select([["Pending" , "pending"],["Delivered" , "delivered"], ["Cancel" , "cancel"], ["walk-in-customer", "walkin"]] , @status_order),
+                {}, { :class => 'btn-outline-dark selection-user', onchange: 'this.form.submit();' }  )
+            %>
+        </label>
           <%end%>
-         </div>
+      </div>
+      <div class="col-lg-5 ms-5 ">
+        <h1 class="head">From Date</h1>
+        <%= form_with(url: search_time_duration_path , method: "get") do |form|%>
+          <%=date_field_tag "from", nil,
+              required: true,
+              autocomplete: "off",
+              class: "form-control"
+          %>
+          <h1 class="head">To Date</h1>
+          <%=
+            date_field_tag "to", nil,
+            required: true,
+            autocomplete: "off",
+            class: "form-control"
+          %>
+          <%=submit_tag  nil,
+            class: "btn btn-outline-dark float-end"
+          %>
+        <%end%>
+      </div>
     </div>
   </div>
   <%end%>
   <div class="container">
-  <%unless @orders.nil? %>
-  <% @orders.each do |order|%>
-  <%orderAddress = order.address%>
-    <%= render partial: "orders", locals: {
-       orderAddress: orderAddress,
-       order: order,
-       totalAmount: "#{order.status == "cancel" ? order.totalvalue*-1 : order.totalvalue }"
-    } %>
-  <%end%>
-  <%else%>
-    <h1 class="m-3 alert alert-danger">No Values Found</h1>
-  <%end%>
+    <%unless @orders.nil? %>
+      <% @orders.each do |order|%>
+        <%orderAddress = order.address%>
+        <%= render partial: "orders", locals: {
+            orderAddress: orderAddress,
+            order: order,
+            totalAmount: "#{order.status == "cancel" ? order.totalvalue*-1 : order.totalvalue }"
+        } %>
+        <%= render partial:"modal",locals: {
+            order: order
+        } %>
+      <%end%>
+    <%else%>
+      <h1 class="m-3 alert alert-danger">No Values Found</h1>
+    <%end%>
   </div>
-
 </div>

@@ -1,0 +1,49 @@
+<div class="modal fade" id="ordercancel<%=order.id%>" tabindex="-1" aria-labelledby="ordercancel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ordercancelLabel">Reson for cancellation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(url: order_path(id: order.id), method: "delete") do |form|%>
+          <%= form.text_field :reason,
+              class: "SearchItem",
+              autocomplete: "off",
+              placeholder: "Write Reason for cancelation",
+              required: true
+          %>
+          <%= form.submit "Cancel Order" , class: "btn btn-danger" %>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="orderdelivered<%=order.id%>" tabindex="-1" aria-labelledby="orderdelivered" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ordercancelLabel">Delivered</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(url: update_pending_status_path(id: order.id), method: "patch") do |form|%>
+          <%= form.text_field :reason,
+              class: "SearchItem",
+              autocomplete: "off",
+              placeholder: "Write Reason for cancelation",
+              required: true
+          %>
+           <%= form.submit "Update Status" , class: "btn btn-primary" %>
+        <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,49 +6,48 @@
     </div>
   </div>
   <div class="container flex">
-      <h1 class="head">#Order<%="#{@order.user_id}#{@order.id}"%></h1>
-      <div class="row justify-content-center">
-        <div class="col-lg-5">
-          <% unless @address.nil?%>
-          <h1 class="bg-dark text-white p-2">Address: </h1>
-          <h1 class="head ps-3 pt-3"><%= @address.name %></h1>
-          <label class="addresscontent p-3 ps-5 ">
-            <%= "#{ @address.street}\t#{@address.city}\t#{@address.state}\t"  %>
-            <h1><%= @address.postal_code%></h1>
-            <h2>Phone number: <%= @address.phonenumber%></h2>
-          </label>
-          <%else%>
-            <h1 class="bg-dark text-white p-2">Walking Customer</h1>
-          <%end%>
-           <div class="p-3 border-bottom border-3">
-              <h2 >Time: <%= @order.order_at.in_time_zone("Chennai")%></h1>
-            </div>
-          <table class="table mt-4 mb-4 border-bottom border-3">
-             <thead class="bg-dark text-light">
-              <tr>
+    <h1 class="head">#Order<%="#{@order.user_id}#{@order.id}"%></h1>
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <% unless @address.nil?%>
+        <h1 class="bg-dark text-white p-2">Address: </h1>
+        <h1 class="head ps-3 pt-3"><%= @address.name %></h1>
+        <label class="addresscontent p-3 ps-5 ">
+          <%= "#{ @address.street}\t#{@address.city}\t#{@address.state}\t"  %>
+          <h1><%= @address.postal_code%></h1>
+          <h2>Phone number: <%= @address.phonenumber%></h2>
+        </label>
+        <%else%>
+          <h1 class="bg-dark text-white p-2">Walking Customer</h1>
+        <%end%>
+        <div class="p-3 border-bottom border-3">
+          <h2 >Time: <%= @order.order_at.in_time_zone("Chennai")%></h1>
+        </div>
+        <table class="table mt-4 mb-4 border-bottom border-3">
+          <thead class="bg-dark text-light">
+            <tr>
               <th scope="col">Name</th>
               <th scope="col">Quantity</th>
               <th scope="col">Price</th>
-              </tr>
-            </thead>
-            <tbody>
+            </tr>
+          </thead>
+          <tbody>
             <% total = 0 %>
             <% @orderitems.each do |orderitem|%>
-              <tr>
-                <td><%= orderitem.menu_item_name %></td>
-                <td><%= orderitem.quantity%></td>
-                <td> <%= orderitem.menu_item_price%></td>
-              </tr>
-              <% total += orderitem.menu_item_price * orderitem.quantity %>
+            <tr>
+              <td><%= orderitem.menu_item_name %></td>
+              <td><%= orderitem.quantity%></td>
+              <td> <%= orderitem.menu_item_price%></td>
+            </tr>
+            <% total += orderitem.menu_item_price * orderitem.quantity %>
             <%end%>
           </tbody>
-          </table>
-          <div class="mt-2 ms-2">
-            Total
-            <div class="float-end  me-5 ">
-              <%=  total%>
-            </div>
-         </div>
+        </table>
+        <div class="mt-2 ms-2">
+          Total
+          <div class="float-end  me-5 ">
+            <%=  total%>
+          </div>
         </div>
       </div>
     </div>
