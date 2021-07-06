@@ -31,16 +31,18 @@
           <%= form.submit "Update Status" , class: "btn btn-primary" %>
         <%end%>
       </div>
-      <div class="col-lg-2 statusupdate">
-        <%= form_with(url: order_path(id: order.id), method: "delete") do |form|%>
-          <%= form.submit "Cancel Order" , class: "btn btn-danger" %>
-        <%end%>
-      </div>
       <%else%>
         <div class="col-lg-2 statusupdate">
           <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : (order.status == "delivered") ? "btn-success" : "btn-danger" %>">
             <%= order.status.capitalize()%>
           </div>
         </div>
+      <%end%>
+      <%if order.delivered_at.nil?  and @current_user.roll != "user"%>
+      <div class="col-lg-2 statusupdate">
+        <%= form_with(url: order_path(id: order.id), method: "delete") do |form|%>
+          <%= form.submit "Cancel Order" , class: "btn btn-danger" %>
+        <%end%>
+      </div>
       <%end%>
 </div>

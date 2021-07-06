@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_032900) do
     t.bigint "user_id", null: false
     t.bigint "address_id"
     t.string "status", null: false
+    t.decimal "totalvalue"
     t.datetime "order_at", null: false
     t.datetime "delivered_at"
     t.index ["address_id"], name: "index_orders_on_address_id"

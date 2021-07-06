@@ -1,0 +1,73 @@
+<div class="All-content">
+  <h1 class="heading">Invoice</h2>
+  <div class="container-fluid me-3">
+    <div class="row">
+      <div class="col-lg-3 col-9 col-sm-9  mb-3 col-md-3 ms-5 bg-white p-4">
+        <%=image_tag "wall-clock.png", class:"invoice-imageicon"%>
+        <div class="float-end">
+          <h1 class="h3 text-danger"><%= @dayTotal%></h1>
+          <p class="fw-bold text-primary">Pending</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-9 col-sm-9  mb-3 col-md-3 ms-5 bg-white p-4">
+        <%=image_tag "day.png", class:"invoice-imageicon"%>
+        <div class="float-end">
+          <h1 class="h3 text-primary"><%= @dayTotal%></h1>
+          <p class="fw-bold text-success">Delivered</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-9 col-sm-9  mb-3 col-md-3 ms-5 bg-white p-4">
+        <%=image_tag "day.png", class:"invoice-imageicon"%>
+        <div class="float-end">
+          <h1 class="h3 text-warning"><%= @dayTotal%></h1>
+          <p class="fw-bold text-danger">Cancel</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-9 col-sm-9  mb-3 col-md-3 ms-5 bg-white p-4">
+        <%=image_tag "day.png", class:"invoice-imageicon"%>
+        <div class="float-end">
+          <h1 class="h3 text-success"><%= @dayTotal%></h1>
+          <p class="fw-bold">Today Sales</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-9  col-sm-9 mb-3 col-md-3  ms-5 bg-white p-4">
+        <%=image_tag "week.png", class:"invoice-imageicon"%>
+         <div class="float-end">
+          <h1 class="h3 text-warning"><%= @weekTotal%></h1>
+          <p class="fw-bold">Week Sales</p>
+        </div>
+      </div>
+      <div class="col-lg-3  col-9 col-sm-9 mb-3 col-md-3  ms-5 bg-white p-4">
+        <%=image_tag "month.png", class:"invoice-imageicon"%>
+         <div class="float-end">
+          <h1 class="h3 text-primary"><%= @monthTotal%></h1>
+          <p class="fw-bold">Month Sales</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3  col-9 col-sm-9 mb-3 col-md-3  ms-5 bg-white p-4">
+        <%=image_tag "profit.png", class:"invoice-imageicon"%>
+         <div class="float-end">
+          <h1 class="h3 text-warning"><%= @yearTotal%></h1>
+          <p class="fw-bold">Year Sales</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3  col-9 col-sm-9 mb-3 col-md-3  ms-5 bg-white p-4">
+        <%=image_tag "money-bag.png", class:"invoice-imageicon"%>
+         <div class="float-end">
+          <h1 class="h3 text-primary"><%= @overAll%></h1>
+          <p class="fw-bold">Over All sales</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3  col-9 col-sm-9 mb-3 col-md-3  ms-5 bg-white p-4">
+        <%=image_tag "wage.png", class:"invoice-imageicon"%>
+         <div class="float-end">
+          <h1 class="h3 text-danger"><%= @highestsale%></h1>
+          <p class="fw-bold">Maximum Sales a day</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

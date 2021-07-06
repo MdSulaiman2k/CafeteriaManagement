@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "invoice/index"
   get "/" => "home#index"
   get "/menu_category/search" => "menu_category#search", as: :search_menu_category
   get "/menu_items/search" => "menu_items#search", as: :search_menu_item
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
   get "/restoremenucategory/:id" => "recycle#restore_menu_category", as: :restore_menu_category
   get "/menu_category/recycle/search" => "recycle#search_menucategory", as: :search_recycle_menu_categories
   delete "/deletemenucategory/:id" => "recycle#delete_menu_category", as: :delete_menu_category
+  get "orders/invoice" => "invoice#index", as: :order_invoice
+  get "orders/status" => "orders#search_status", as: :search_order_status
   resources :users
   resources :menu_category
   resources :menu_items

@@ -3,7 +3,13 @@ class HomeController < ApplicationController
 
   def index
     if current_user
-      redirect_to menu_category_index_path
+      if current_user.roll == "admin"
+        redirect_to order_invoice_path and return
+      elsif current_user.roll == "clerk"
+        redirect_to "/orders"
+      else
+        redirect_to menu_category_index_path
+      end
     else
       render "index"
     end

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :get_order_address, only: %i[create index]
+  before_action :get_order_address, only: %i[create index search]
   before_action :ensure_admin_in, :only => [:search, :update_pending_status]
 
   def create
@@ -17,10 +17,23 @@ class OrdersController < ApplicationController
   end
 
   def search
-    order_at = Order.find_by(id: params[:id])
-    unless (order_at.nil?)
-      @orders = [order_at]
+    search = params[:search]
+    begin
+      value = Integer(params[:id])
+      order_at = Order.where("#{search} = ?", value)
+    rescue
+      @orders = nil
+      flash[:error] = "Enter valid input"
     end
+    unless (order_at.nil?)
+      @orders = order_at
+    end
+    render "index"
+  end
+
+  def search_status
+    @status_order = params[:status]
+    @orders = Order.where("status = ?", @status_order)
     render "index"
   end
 
@@ -58,7 +71,7 @@ class OrdersController < ApplicationController
     if @current_user.roll == "admin"
       @pagy, @orders = pagy(Order.order("delivered_at DESC NULLS FIRST", id: :desc))
     elsif @current_user.roll == "clerk"
-      @pagy, @orders = pagy(Order.where("user_id = ? or delivered_at is NULL", current_user.id).order("delivered_at DESC NULLS FIRST", id: :desc))
+      @pagy, @orders = pagy(Order.where("order_at >=? and order_at<=?", DateTime.now().beginning_of_month - 1.months, DateTime.now()).order("delivered_at DESC NULLS FIRST", id: :desc))
     else
       @pagy, @orders = pagy(@current_user.orders.order("delivered_at DESC NULLS FIRST", id: :desc))
     end

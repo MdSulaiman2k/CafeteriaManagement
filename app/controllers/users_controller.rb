@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in, :only => [:create, :new]
   before_action :ensure_admin_in, :only => [:index, :updateroll, :search]
   before_action :set_user, only: %i[ edit update destroy updateroll ]
-  skip_before_action :verify_authenticity_token
 
   def index
     @pagy, @users = pagy(User.where("archived_on is NULL").order(:name, :id), items: 10)
@@ -31,15 +30,16 @@ class UsersController < ApplicationController
 
   def search
     name = params[:name]
-    search = params[:search]
-    unless name.nil?
-      if (search == "id")
+    @search_category = params[:search]
+    if ((@search_category == "id"))
+      begin
+        id = Integer(name)
         @pagy, @users = pagy(User.where("id = ? and archived_on is NULL", name))
-      else
-        @pagy, @users = pagy(User.where("lower(#{search})  Like '" + "#{name.downcase}%' and archived_on is NULL").order(:name, :id), items: 10)
+      rescue
+        flash[:error] = "Enter valid input"
       end
     else
-      @pagy, @users = pagy(User.where("archived_on is NULL").order(:name, :id), items: 10)
+      @pagy, @users = pagy(User.where("lower(#{@search_category})  Like '" + "#{name.downcase}%' and archived_on is NULL").order(:name, :id), items: 10)
     end
     render "index"
   end
