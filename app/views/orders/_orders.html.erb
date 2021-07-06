@@ -8,7 +8,7 @@
           <h2>Phone number: <%= orderAddress.phonenumber%></h2>
         </label>
         <%else%>
-          <h1 class="head">Walking Customer</h1>
+          <h1 class="head">Walk-in-Customer</h1>
           <h1 class="ms-2 mt-3 fw-bold">Food Placed By</h1>
           <h1 class="mt-2 ms-4"><%= "#{User.find(order.user_id).name.capitalize()}"%></h1>
         <%end%>

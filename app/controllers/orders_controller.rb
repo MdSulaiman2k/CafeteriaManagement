@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :get_order_address, only: %i[create index search]
-  before_action :ensure_admin_in, :only => [:search, :update_pending_status]
+  before_action :ensure_admin_in, :only => [:search, :update_pending_status, :search_status]
 
   def create
     if (params[:address].nil? and @current_user.roll != "clerk")
@@ -17,10 +17,10 @@ class OrdersController < ApplicationController
   end
 
   def search
-    search = params[:search]
+    @search = params[:search]
     begin
       value = Integer(params[:id])
-      order_at = Order.where("#{search} = ?", value)
+      order_at = Order.where("#{@search} = ?", value).order("delivered_at DESC NULLS FIRST", id: :desc)
     rescue
       @orders = nil
       flash[:error] = "Enter valid input"
@@ -33,7 +33,11 @@ class OrdersController < ApplicationController
 
   def search_status
     @status_order = params[:status]
-    @orders = Order.where("status = ?", @status_order)
+    if (@status_order == "walkin")
+      @orders = Order.where("address_id is NULL").order("delivered_at DESC NULLS FIRST", id: :desc)
+    else
+      @orders = Order.where("status = ?", @status_order).order("delivered_at DESC NULLS FIRST", id: :desc)
+    end
     render "index"
   end
 

@@ -14,8 +14,8 @@
             <%= form.submit "Search",
                 class: "btn btn-outline-dark Search Item-button"
             %>
-             <label class="categoryheading">Search Category </label>
-                <%= form.select(:search, options_for_select([["order_id" , "id"],["user_id" , "user_id"]] , "order_id"),
+             <label class="categoryheading">Search Order</label>
+                <%= form.select(:search, options_for_select([["order_id" , "id"],["user_id" , "user_id"]] , @search),
                       {}, { :class => 'btn-outline-dark selection-user'}  )
                 %>
                 <%end%>
@@ -24,7 +24,7 @@
          <div class="col-lg-5">
           <%=form_with(url: search_order_status_path   , method: "get") do |form| %>
             <label class="categoryheading">Show Order</label>
-                <%= form.select(:status, options_for_select([["Pending" , "pending"],["Delivered" , "delivered"], ["Cancel" , "cancel"]] , @status_order),
+                <%= form.select(:status, options_for_select([["Pending" , "pending"],["Delivered" , "delivered"], ["Cancel" , "cancel"], ["walk-in-customer", "walkin"]] , @status_order),
                       {}, { :class => 'btn-outline-dark selection-user', onchange: 'this.form.submit();' }  )
                 %>
             </label>
