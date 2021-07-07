@@ -1,8 +1,8 @@
 <div class="All-content">
   <div class="flex">
     <h1 class="heading">Order Items</h1>
-    <div class="float-end me-5 btn <%=@order.delivered_at.nil? ? "btn-danger" : "btn-success" %>">
-      <%=@order.delivered_at.nil? ? "Pending" : "Delivered" %>
+    <div class="float-end me-5 btn <%=@order.delivered_at.nil? || @order.status == "cancel" ? "btn-danger" : "btn-success" %>">
+      <%=@order.delivered_at.nil? ? "Pending" : @order.status == "cancel" ? "Canceled" : "Delivered" %>
     </div>
   </div>
   <div class="container flex">

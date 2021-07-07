@@ -34,8 +34,8 @@
   </div>
   <%else%>
     <div class="col-lg-2 statusupdate">
-      <div class="me-5 btn <%=order.delivered_at.nil? ? "btn-danger" : (order.status == "delivered") ? "btn-success" : "btn-danger" %>">
-        <%= order.status.capitalize()%>
+      <div class="me-5 btn <%=order.delivered_at.nil? || (order.status == "delivered")? "btn-danger" :  "btn-success"%>">
+         <%= order.delivered_at.nil? ? "Pending" :  order.status == "cancel" ? "Canceled" : "Delivered" %>
       </div>
     </div>
   <%end%>
