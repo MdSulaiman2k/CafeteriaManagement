@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :get_order_address, only: %i[index]
+  before_action :ensure_user_in, only: %i[shift_cart_to_order]
 
   def shift_cart_to_order
     checkerror = false

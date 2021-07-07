@@ -1,4 +1,6 @@
 class CartItemsController < ApplicationController
+  before_action :ensure_user_in
+
   def index
   end
 

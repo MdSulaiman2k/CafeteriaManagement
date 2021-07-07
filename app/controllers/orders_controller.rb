@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :get_order_address, only: %i[create index search]
   before_action :ensure_admin_in, :only => [:search, :update_pending_status, :search_status]
+  before_action :ensure_user_in, only: %i[create]
 
   def create
     if (params[:address].nil? and @current_user.roll != "clerk")
