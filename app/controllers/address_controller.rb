@@ -56,7 +56,7 @@ class AddressController < ApplicationController
         redirect_to "/address"
       end
     else
-      flash[:error] = "Your Address is exteed"
+      flash[:error] = "Your Address is exceed"
       redirect_to "/address"
     end
   end
