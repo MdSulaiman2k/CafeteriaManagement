@@ -1,0 +1,132 @@
+<div class="modal fade" id="Login-in" tabindex="-1" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h5 fw-bold" id="Login">Sign-in</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2 class="navbar-title headpage">
+          FoodService.com
+        </h2>
+        <h2 class="heading" >
+          Sign-in!
+        </h2>
+        <section class="ms-5">
+        <%= form_with url: sessions_path do |form| %>
+          <div class = "Form-section">
+            <label class="FormInput-label">
+              Email*
+            </label>
+            <%= form.email_field :email,
+                           class: "Form-input",
+                           required: true,
+                           autofocus: true,
+                           autocomplete: "off"
+            %>
+          </div>
+          <div class = "Form-section">
+            <label class="FormInput-label">
+            Password*
+            </label>
+            <%= form.password_field :password,
+                          class: "Form-input" ,
+                          required: true,
+                          autocomplete: "off"
+            %>
+          </div>
+          <%= form.submit "Sign-in!", class: "Form-submit" %>
+        <% end %>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="Signup" tabindex="-1" aria-labelledby="Sign-up" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h5 fw-bold" id="Signup">Sign-up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2 class="navbar-title headpage">
+          FoodService.com
+        </h2>
+        <h1 class="heading"> Create Users</h1>
+          <section class="ms-5">
+            <%= form_with url: users_path do |form| %>
+              <div class = "Form-section">
+                <label class="FormInput-label"> First Name* </label>
+                <%= form.text_field :first_name,
+                          class: "Form-input",
+                          autofocus: true,
+                          required: true,
+                          autocomplete: "off"
+                %>
+              </div>
+              <div class = "Form-section">
+                <label class="FormInput-label">
+                Last Name
+                </label>
+                <%= form.text_field :last_name,
+                    class: "Form-input",
+                    autocomplete: "off"
+                %>
+              </div>
+              <div class = "Form-section">
+                <label class="FormInput-label">
+                Email*
+                </label>
+                <%= form.email_field :email,
+                    class: "Form-input",
+                    required: true,
+                    autocomplete: "off"
+                %>
+              </div>
+              <div class = "Form-section">
+                <label class="FormInput-label">Phone number* </label>
+                <%= form.number_field :phone,
+                      class: "Form-input",
+                      autofocus: true,
+                      required: true,
+                      autocomplete: "off",
+                      maxlength: 13,
+                      minlength: 10
+                %>
+              </div>
+              <div class = "Form-section">
+                <label class="FormInput-label">
+                Password*
+                </label>
+                <%= form.password_field :password,
+                    class: "Form-input",
+                    required: true,
+                    autocomplete: "off"
+                %>
+              </div>
+              <%if @current_user  && @current_user.roll == "admin"%>
+                <div class = "Form-section">
+                  <label class="FormInput-label">
+                  Roll*
+                  </label>
+                  <%= form.select(:roll, options_for_select( [["clerk" , "clerk"], ["admin" , "admin"] ] , "clerk"),
+                    {}, { :class => 'btn-outline-dark selection-input'}  )
+                  %>
+                </div>
+              <%end%>
+              <%= form.submit "Create Account",
+                    class: "Form-submit"
+              %>
+            <% end %>
+          </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

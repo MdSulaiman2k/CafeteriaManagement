@@ -6,9 +6,10 @@
           Order Your Food On FoodService.com Order Food Safely On Food
           Service.com
         </h2>
-        <button class="btn btn-light"> <%= link_to "Sign up here" ,new_user_path %></button>
-        <button class="btn btn-light"> <%= link_to "Sign in here" ,new_sessions_path %></button>
-
+          <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Signup" data-bs-whatever="Signup"> Sign up here</button>
+          <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#Login-in" data-bs-whatever="Login-in">
+            Sign in here
+          </button>
       </div>
       <div class="col-lg-5 col-md-7 col-sm-7">
         <%=image_tag "food.png", class: "imag-fir" %>
@@ -16,3 +17,4 @@
     </div>
   </div>
 </div>
+<%= render "modal"%>

@@ -13,9 +13,10 @@
          <div class="col-lg-4">
             <%if @current_user.roll == "admin"%>
                <abbr title="Add new Users">
-                  <%= link_to new_user_path, class: "btn new-btn " do %>
+                  <%# <%= link_to new_user_path, class: "btn new-btn " do %>
+                  <button class="btn new-btn" data-bs-toggle="modal" data-bs-target="#Signup" data-bs-whatever="Signup">
                      <%= image_tag("addmenu.png", border: 0,class: 'add_menu_items') %>New
-                  <%end%>
+                  </button>
                </abbr>
             <%end%>
          </div>
@@ -69,3 +70,4 @@
     </div>
 </div>
 </div>
+<%= render partial: "/home/modal"%>
