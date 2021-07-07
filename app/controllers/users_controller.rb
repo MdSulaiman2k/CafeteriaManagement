@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def updateroll
-    if (@user.id == current_user.id)
-      flash[:error] = "Not allowed to update own account"
+    if (@user.id == current_user.id || @user_id == 1)
+      flash[:error] = "Not allowed to update"
     else
       @user.roll = params[:roll]
       unless @user.save(validate: false)

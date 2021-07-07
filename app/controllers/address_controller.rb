@@ -40,7 +40,7 @@ class AddressController < ApplicationController
     unless @address.save
       flash[:error] = @address.error.full_messages.join(", ")
     end
-    redirect_back(fallback_location: "/")
+    redirect_to "/address"
   end
 
   def create
