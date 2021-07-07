@@ -95,7 +95,7 @@ class UsersController < ApplicationController
       end
     else
       flash[:error] = user.errors.full_messages.join(", ")
-      redirect_to new_user_path
+      redirect_back(fallback_location: "/")
     end
   end
 
