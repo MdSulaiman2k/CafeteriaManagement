@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ensure_user_in
+    unless current_user.roll == "user" || current_user.roll == "clerk"
+      redirect_to error_path
+    end
+  end
+
   def set_cart_items
     @cartitems = CartItem.where("user_id = ? ", current_user.id)
     @totalamount = 0

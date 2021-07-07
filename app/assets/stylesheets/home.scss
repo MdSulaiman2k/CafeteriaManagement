@@ -1,3 +1,26 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.homepage{
+  background-color: #ff4c68;
+  padding : 1% 15% ;
+  font-family: 'Fredoka One', cursive;
+  color : white ;
+  line-height: 2;
+  font-size: 5rem;
+  padding : 10% 13% ;
+  padding-bottom: 1%;
+  padding-top: 2%;
+}
+
+.headpage{
+  font-family: 'Fredoka One', cursive;
+  color : white ;
+  line-height: 2;
+  padding-left: 6%;
+}
+
+.imag-fir{
+  width : 40%;
+  transform:  rotate(25deg);
+}
