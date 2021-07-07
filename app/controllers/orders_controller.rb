@@ -40,9 +40,13 @@ class OrdersController < ApplicationController
   end
 
   def search_time_duration
-    to = params[:to]
-    @pagy, @orders = pagy(Order.where("order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
-      order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
+    if current_user.roll == "admin" || current_user.roll == "clerk"
+      @pagy, @orders = pagy(Order.where("order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
+        order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
+    else
+      @pagy, @orders = pagy(Order.where("user_id = #{current_user.id} and order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
+        order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
+    end
     render "index"
   end
 
