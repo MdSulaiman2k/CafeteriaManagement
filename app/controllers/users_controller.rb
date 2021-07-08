@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "\n\n\n#{current_user.id == params[:id]}#{current_user.id}#{params[:id]}\n\n"
     if current_user.id == Integer(params[:id])
       set_user
     else
