@@ -14,6 +14,7 @@ Cafeteria Management application is a fully functional web application the user 
 # Admin
    Admin can create,edit,update status, delete a menu categories and  menu items and manage the users create a clerk create another admin update user and
    delete user.view the order and mark order item as complete admin can see the total transaction  happened in the application and edit his own profile
+   Admin can see the delete menu category and restore it similarly for menu items too.
 
 # Admin View
 

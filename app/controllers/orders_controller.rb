@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
       @pagy, @orders = pagy(Order.where("order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
         order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     else
-      @pagy, @orders = pagy(Order.where("user_id = #{current_user.id} and order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
+      @pagy, @orders = pagy(current_user.orders.where("order_at >= '#{params[:from].in_time_zone("Asia/Kolkata")}' AND order_at <= '#{params[:to].in_time_zone("Asia/Kolkata").end_of_day}'").
         order("delivered_at DESC NULLS FIRST", id: :desc), items: 10)
     end
     render "index"
@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = @current_user.order.find(params[:id])
+    @order = @current_user.orders.find(params[:id])
   end
 
   private
