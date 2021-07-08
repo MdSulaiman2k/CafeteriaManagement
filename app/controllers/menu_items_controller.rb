@@ -58,6 +58,11 @@ class MenuItemsController < ApplicationController
     id = params[:id]
     status = params[:status] ? "Active" : "InActive"
     menu_item = MenuItem.find(id)
+    menu_category = MenuCategory.find(menu_item.menu_category_id)
+    unless menu_category.status
+      flash[:error] = "First Update the menu Category status"
+      redirect_back(fallback_location: "/") and return
+    end
     menu_item.status = status
     menu_item.save!
     redirect_back(fallback_location: "/")

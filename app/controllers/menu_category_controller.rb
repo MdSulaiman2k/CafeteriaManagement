@@ -34,6 +34,12 @@ class MenuCategoryController < ApplicationController
     status = params[:status] ? true : false
     menu_category = MenuCategory.find(id)
     menu_category.status = status
+    menuitems = MenuItem.where("menu_category_id = ?", id)
+    if (status)
+      setMenuitemstatus(menuitems, "Active")
+    else
+      setMenuitemstatus(menuitems, "InActive")
+    end
     menu_category.save!
     redirect_back(fallback_location: "/")
   end
@@ -66,5 +72,12 @@ class MenuCategoryController < ApplicationController
 
   def menu_category_params
     params.require(:menu_category).permit(:name)
+  end
+
+  def setMenuitemstatus(menuitems, status)
+    menuitems.each do |item|
+      item.status = status
+      item.save
+    end
   end
 end
