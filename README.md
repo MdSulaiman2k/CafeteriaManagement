@@ -1,9 +1,15 @@
 # Food Service Web Application
 
 Cafeteria Management application is a fully functional web application the user was divided into 3 roll
-      # admin   email:  s@gmail.com   ->  password: sulaiman
-      # clerk   email: clerk@gmail.com  ->   password:  sulaiman
-      # user
+
+-----------------------------------------------------------------------------------------------------------
+
+
+      # Admin   email:  s@gmail.com   ->  password: sulaiman
+      # Clerk   email: clerk@gmail.com  ->   password:  sulaiman
+      # User
+
+-------------------------------------------------------------------------------------------------------------
 
 # Admin
    Admin can create,edit,update status, delete a menu categories and  menu items and manage the users create a clerk create another admin update user and
