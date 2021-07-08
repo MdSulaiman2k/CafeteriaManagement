@@ -25,7 +25,11 @@ class OrderItemsController < ApplicationController
   end
 
   def index
-    @orderitems = User.find(params[:user_id]).orders.find(params[:order_id]).order_items.order(:id)
+    if (current_user.roll == "admin" || current_user.roll == "clerk")
+      @orderitems = User.find(params[:user_id]).orders.find(params[:order_id]).order_items.order(:id)
+    else
+      @orderitems = current_user.orders.find(params[:order_id]).order_items.order(:id)
+    end
   end
 
   def get_order_address
