@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def updateroll
     if (@user.id == 1)
-      flash[:error] = "Super admin you not able to update"
+      flash[:error] = " Super admin you not able to update "
     end
     if (@user.id == current_user.id)
       flash[:error] = "Not allowed to update"
