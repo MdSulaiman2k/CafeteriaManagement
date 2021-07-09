@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get "orders/invoice" => "invoice#index", as: :order_invoice
   get "orders/status" => "orders#search_status", as: :search_order_status
   get "orders/timeduration" => "orders#search_time_duration", as: :search_time_duration
+  get "users/recycle" => "recycle#user_recycle"
+  get "/users/recycle/search" => "recycle#search_users", as: :search_recycle_users
+  get "/restore_user/:id" => "recycle#restore_user", as: :restore_recycle_users
   resources :users
   resources :menu_category
   resources :menu_items

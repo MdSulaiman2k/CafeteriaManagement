@@ -8,6 +8,36 @@ class RecycleController < ApplicationController
     render "index"
   end
 
+  def user_recycle
+    @pagy, @users = pagy(User.where("archived_on is not NULL"))
+    render "user-index"
+  end
+
+  def search_users
+    name = params[:name]
+    @search_category = params[:search]
+    if ((@search_category == "id"))
+      begin
+        id = Integer(name)
+        @pagy, @users = pagy(User.where("id = ? and archived_on is not NULL", name))
+      rescue
+        flash[:error] = "Enter valid input"
+      end
+    else
+      @pagy, @users = pagy(User.where("lower(#{@search_category})  Like '" + "#{name.downcase}%' and archived_on is not NULL").order(:name, :id), items: 10)
+    end
+    render "user-index"
+  end
+
+  def restore_user
+    user = User.find(params[:id])
+    user.archived_on = nil
+    unless user.save(validate: false)
+      flash[:error] = user.errors.full_messages.join(", ")
+    end
+    redirect_back(fallback_location: "/")
+  end
+
   def menu_category_recycle
     @pagy, @menucategories = pagy(MenuCategory.where("archived_on is not NULL"))
     render "category-index"

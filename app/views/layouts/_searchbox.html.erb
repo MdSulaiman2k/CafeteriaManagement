@@ -9,7 +9,7 @@
             <%= form.submit place,
                 class: "btn btn-outline-dark Search Item-button"
             %>
-            <% if url_path == "/users/search" %>
+            <% if url_path == "/users/search"  || url_path == "/users/recycle/search" %>
                 <label class="categoryheading">Search Category </label>
                 <%= form.select(:search, options_for_select([["id" , "id"],["name" , "name"], ["role" , "roll"],
                     ["email" , "email"] , ["phonenumber" , "phonenumber"]] , @search_category),
